@@ -8,7 +8,7 @@ int main(){
     cin>>t;
     while(t--){
         int n;
-        cin>>n;
+        cin>>n;asd
         cout<<n<<endl;
     }
     return 0;
