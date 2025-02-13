@@ -40,10 +40,12 @@ int main(){
     //     cout<<sum[i]<<" ";
     //    }
        long long total = 0;
-       for(long long i = 0; i < sum.size()-1; i++){
-            for(long long j = i+1; j < sum.size(); j++){
-                total += abs(sum[i] - sum[j]);
-            }
+       long long size = sum.size();
+       for(long long i = 0; i < sum.size(); i++){
+            long long front = size - (i+1);
+            long long prev = i;
+            total -= prev*sum[i];
+            total += front*sum[i];
        }
        
        cout<<total<<endl;
