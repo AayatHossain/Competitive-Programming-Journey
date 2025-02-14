@@ -36,9 +36,9 @@ int main(){
             }
             sum.push_back(sum1);
        }
-    //    for(long long i = 0; i < sum.size(); i++){
-    //     cout<<sum[i]<<" ";
-    //    }
+       for(long long i = 0; i < sum.size(); i++){
+        cout<<sum[i]<<" ";
+       }
        long long total = 0;
        long long size = sum.size();
        for(long long i = 0; i < sum.size(); i++){
