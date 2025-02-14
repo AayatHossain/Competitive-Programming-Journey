@@ -1,8 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int bS(int s, int e, vector<pair<int,int>> b, int v){
-    int mid;
+long long bS(long long s, long long e, vector<pair<long long,long long>> b, long long v){
+    long long mid;
     while(s <= e){
         mid = (s+e)/2;
         if(b[mid].first == v){
@@ -17,30 +17,36 @@ int bS(int s, int e, vector<pair<int,int>> b, int v){
 }
 
 int main(){
-    int t;
+    long long t;
     cin>>t;
     while(t--){
-        int n;
+        long long n;
         cin>>n;
-        vector<int> a(n);
-        vector<pair<int,int>> b;
-        for(int i = 0; i < n; i++){
+        vector<long long> a(n);
+        // vector<pair<long long,long long>> b;
+        unordered_map<long long, long long> um;
+        for(long long i = 0; i < n; i++){
             cin>>a[i];
-            b.push_back(make_pair(a[i], i));
+            // b.push_back(make_pair(a[i], i));
+            um[a[i]] = i;
         }
-        sort(b.begin(), b.end());
-        int start = 0;
-        int end = n-1;
-        int max = n;
-        int min = 1;
-        int flag = 0;
+        // sort(b.begin(), b.end());
+        long long start = 0;
+        long long end = n-1;
+        long long max = n;
+        long long min = 1;
+        long long flag = 0;
         while(start < end){
             
             // cout<<max<<" "<<min<<endl;
             // cout<<start<<" "<<end<<endl;
 
-            int maxI = bS(0, n-1, b,max);
-            int minI = bS(0, n-1, b, min);
+            // long long maxI = bS(0, n-1, b,max);
+            // long long minI = bS(0, n-1, b, min);
+            long long maxI = um[max];
+            long long minI = um[min];
+
+            
             
             // cout<<maxI<<" "<<minI<<endl;
             // cout<<"zzzzzzzzzzzzzz"<<endl;
@@ -49,8 +55,8 @@ int main(){
             // }
 
 
-            int startChanged = 0;
-            int endChanged = 0;
+            long long startChanged = 0;
+            long long endChanged = 0;
             
             if(maxI==start){
                 start++;
@@ -75,7 +81,7 @@ int main(){
            
             // cout<<start<<" "<<end<<"with max and min = "<<max<<" "<<min<<endl;
             if(startChanged==0 && endChanged==0){
-                cout<<min<<" "<<max<<endl;
+                cout<<start+1<<" "<<end+1<<endl;
                 flag = 1;
                 break;
             }
