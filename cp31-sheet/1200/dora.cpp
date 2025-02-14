@@ -6,6 +6,7 @@ int bS(int s, int e, vector<pair<int,int>> b, int v){
     while(s <= e){
         mid = (s+e)/2;
         if(b[mid].first == v){
+            
             return b[mid].second;
         }else if(b[mid].first < v){
             s = mid + 1;
@@ -39,33 +40,32 @@ int main(){
             int maxI = bS(start, end, b,max);
             int minI = bS(start, end, b, min);
             
-            // if(max==6 && min==5){
-            //     cout<<maxI<<" "<<minI<<" ";
-            //     cout<<endl;
+            cout<<max<<" "<<min<<endl;
+            cout<<maxI<<" "<<minI<<endl;
+            cout<<"zzzzzzzzzzzzzz"<<endl;
+            // if(maxI==-1 || minI== -1){
+            //     cout<<"hi";
             // }
-            if(maxI==-1 || minI== -1){
-                break;
-            }
 
 
             int startChanged = 0;
             int endChanged = 0;
-            if(maxI==start && startChanged==0){
+            if(maxI==start){
                 start++;
                 startChanged = 1;
                 max--;
             }
-            if(maxI==end && endChanged==0){
+            if(maxI==end){
                 end--;
                 endChanged = 1;
                 max--;
             }
-            if(minI==start && startChanged==0){
+            if(minI==start){
                 start++;
                 startChanged = 1;
                 min++;
             }
-            if(minI==end && endChanged==0){
+            if(minI==end){
                 end--;
                 endChanged = 1;
                 min++;
