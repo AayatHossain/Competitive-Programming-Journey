@@ -2,22 +2,31 @@
 using namespace std;
 int main(){
     
-    long long t;
+    int t;
     cin>>t;
     while(t--){
         int n;
         cin>>n;
+        
         map<int, int> m;
+        set<int> s;
         for(int i = 0; i < n; i++){
             int x;
             cin>>x;
-            m[i]++;
+            s.insert(x);
+            s.insert(x+1);
+            m[x]++;
+            
+            
         }
         int count = 0;
-        for(int i = 1; i <= n; i++){
-            if(m[i] > m[i-1]){
-                count+= m[i] - m[i-1];
-            }
+        int prev = 0;
+        for(auto x: s){
+           if(m[x] > m[prev]){
+            count += m[x] - m[prev];
+           }
+           prev = x;
+
         }
         cout<<count<<endl;
     }
