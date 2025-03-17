@@ -1,49 +1,106 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main()
+#define int long long
+signed main()
 {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    long long t;
+    int t;
     cin >> t;
     while (t--)
     {
-       int n;
-       cin>>n;
-       vector<int> a(n);
-       vector<int> count(n+1, 0);
-       for(int i = 0; i < n; i++){
-        cin>>a[i];
-        count[a[i]]++;
-       }
-       int flag = 1;
-       for(int i = 0; i < n; i++){
-        if(count[i]==1){
-            flag = 0;
-            break;
-        }else if(count[i]  != 0){
-            int rem = count[i];
-            count[i] = 2;
-            count[i + 1] += rem - 2;
+        int n, x, k;
+        string s;
+        cin >> n >> x >> k >> s;
+        int ans = 0;
+        int time = k;
+        int position = x;
+
+        int zeroFound = -1;
+        int currIndex = -1;
+        for (int i = 0; i < s.size(); i++)
+        {
+            
+            if (s[i] == 'L')
+            {
+                position--;
+            }
+            else
+            {
+                position++;
+            }
+            time--;
+            if (time == 0)
+            {   
+                break;
+            }
+            if (position == 0)
+            {
+                zeroFound = 1;
+                currIndex = i;
+                break;
+            }
         }
-       }
-       if(!flag){
-        cout<<"NO"<<endl;
-       }else{
-            for(int i = 0; i <= n; i++){
-                if(count[i] % 2 != 0){
-                    cout<<"NO"<<endl;
-                    flag = 0;
+        // cout << time << endl;
+        if (time == 0)
+        {
+            if (position == 0)
+            {
+                cout << 1 << endl;
+            }
+            else
+            {
+                cout << 0 << endl;
+            }
+            continue;
+        }
+        if (zeroFound == -1)
+        {
+            // cout<<"hi"<<endl;
+            cout << 0 << endl;
+        }
+        else
+        {
+            int newPos = 0;
+            int cycleLength = -1;
+            for (int j = 0; j < n; j++)
+            {
+                if (time == 0)
+                {
                     break;
                 }
+
+                if (s[j] == 'L')
+                {
+                    newPos--;
+                }
+                else
+                {
+                    newPos++;
+                }
+
+                if (newPos == 0)
+                {
+                    cycleLength = j + 1;
+                    break;
+                }
+               
             }
-            if(flag){
-                cout<<"YES"<<endl;
+
+            if (cycleLength == -1)
+            {
+                cout << 1 << endl;
             }
-       }
-       
+            else
+            {
+                ans = 1;
+               
+                ans += (time / cycleLength);
+                cout << ans << endl;
+            }
+        }
     }
     return 0;
 }
