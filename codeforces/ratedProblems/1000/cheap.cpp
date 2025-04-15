@@ -11,22 +11,23 @@ int main()
         string w;
         int p;
         cin >> w >> p;
-        vector<pair<int, char>> a;
+        vector<pair<char, int>> a;
         int cost = 0;
         for (int i = 0; i < w.size(); i++)
         {   
             cost += w[i] - 'a' + 1;
-            a.push_back({i+1, w[i]});
+            a.push_back({w[i], i+1});
         }
+        // cout<<cost<<endl;
         sort(a.begin(), a.end());
         int j = a.size() - 1;
         while(cost > p){
-            cost -= w[j] - 'a' + 1;
+            cost -= a[j].first - 'a' + 1;
             j--;
         }
         vector<pair<int,char>> ans;
         for(int i = 0; i <= j; i++){
-            ans.push_back({a[i]});
+            ans.push_back({a[i].second, a[i].first});
         }
         sort(ans.begin(), ans.end());
         string ans2;
