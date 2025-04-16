@@ -16,7 +16,7 @@ signed main(){
         }else if(hasA && t.size() == 1){
             cout<<1<<endl;
         }else{
-            cout<<pow(2, s.size())<<endl;
+            cout<<(long long) pow(2, s.size())<<endl;
         }
     }
     return 0;

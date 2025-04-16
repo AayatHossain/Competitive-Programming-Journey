@@ -1,7 +1,2 @@
-3
-aaaa
-a
-aa
-abc
-a
-b
+1
+abvd
