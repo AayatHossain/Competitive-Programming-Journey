@@ -12,7 +12,7 @@ signed main(){
        for(int i = 1; i <= n/2; i++){
             cout<<a[i]<<" "<<a[0]<<endl;
        }
-       cout<<"done"<<endl;
+    //    cout<<"done"<<endl;
 
     }
     return 0;
