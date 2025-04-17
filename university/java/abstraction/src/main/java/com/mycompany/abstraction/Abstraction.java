@@ -25,7 +25,10 @@ class JuniorDeveloper extends SeniorDeveloper{
     double calcAvg(double a, double b){
         return (a+b)/2;
     }
-    super.netWorth = 500;
+    JuniorDeveloper(){
+        this.netWorth = 500;
+    }
+//    super.netWorth = 500; this is wrong
 }
 
 
@@ -33,9 +36,11 @@ public class Abstraction {
 
     public static void main(String[] args) {
         JuniorDeveloper j1 = new JuniorDeveloper();
-        int a = j1.calcAvg(5, 4);
+        System.out.println(j1.companyName);
+        double a = j1.calcAvg(5, 4);
         System.out.println(a);
         System.out.println(j1.netWorth);
-        j1.printSeries();
+        j1.printSeries(10);
+        System.out.println();
     }
 }
