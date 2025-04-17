@@ -8,7 +8,7 @@ package com.mycompany.normalinheritance;
  *
  * @author User
  */
-
+//no constructor
 class CorruptedPerson{
     String name; int age;
 }
