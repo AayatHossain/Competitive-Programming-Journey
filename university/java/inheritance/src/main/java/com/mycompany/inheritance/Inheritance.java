@@ -14,6 +14,7 @@ class Animal{
     Animal(String name){
         this.name = name;
     }
+   
 }
 class Mammal extends Animal{
     String color; int age;
