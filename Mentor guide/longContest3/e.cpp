@@ -7,6 +7,7 @@ int main(){
         string str;
         getline(cin, str);
         int n;cin>>n;
+        asdashdkjas
         vector<int> s(n+1, 0);
         vector<int> e(n+1, 0);
         int clock = 0;
