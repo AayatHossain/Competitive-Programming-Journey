@@ -6,6 +6,9 @@ void addEdge(vector<int> graph[], int src, int dst){
 }
 void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
     queue<int> q;
+    // set<int> cycleStart;
+    int start = -1;
+    int end = -1;
     q.push(s);
     vis[s] = true;
     int found = 0;
@@ -21,7 +24,12 @@ void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
                     vis[v] = true;
                     p[v] = u;
                 }else{
-                    if(v==u)
+                    if(p[u] != v){
+                        found = 1;
+                        start = v;
+                        end = u;
+                        break;
+                    }
                 }
             }
         }
@@ -29,17 +37,30 @@ void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
             break;
         }
     }
+    cout<<start<<end<<endl;
+    // return;
     if(!found){
         cout<<"IMPOSSIBLE"<<endl;
     }else{
         vector<int> route;
-        int curr = p[d];
-        route.push_back(d);
-        while(curr != s){
+        
+        route.push_back(start);
+        route.push_back(end);
+        
+        int curr = p[end];
+        
+        // route.push_back(d);
+        while(curr != start){
+            
             route.push_back(curr);
             curr = p[curr];
+            for(int i = 0; i < route.size(); i++){
+                cout<<route[i] <<" ";
+            }
+            return;
+            
         }
-        route.push_back(s);
+        route.push_back(start);
         reverse(route.begin(), route.end());
         cout<<route.size()<<endl;
         for(auto x: route){
