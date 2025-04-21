@@ -23,11 +23,13 @@ void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
                     q.push(v);
                     vis[v] = true;
                     p[v] = u;
+                    cout<<v<<" "<<p[v]<<endl;
                 }else{
                     if(p[u] != v){
                         found = 1;
                         start = v;
                         end = u;
+                        // cout<<p[u]+1<<" "<<start+1<<" "<<end+1<<endl;
                         break;
                     }
                 }
@@ -37,7 +39,7 @@ void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
             break;
         }
     }
-    cout<<start<<end<<endl;
+    cout<<start+1<<" "<<end+1<<endl;
     // return;
     if(!found){
         cout<<"IMPOSSIBLE"<<endl;
@@ -50,15 +52,16 @@ void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
         int curr = p[end];
         
         // route.push_back(d);
-        while(curr != start){
+        
+        while(curr != start && curr != -1){
             
             route.push_back(curr);
             curr = p[curr];
-            for(int i = 0; i < route.size(); i++){
-                cout<<route[i] <<" ";
-            }
-            return;
-            
+            // for(int i = 0; i < route.size(); i++){
+            //     cout<<route[i] <<" ";
+            // }
+            // cout<<curr<<endl;
+            // return;
         }
         route.push_back(start);
         reverse(route.begin(), route.end());
