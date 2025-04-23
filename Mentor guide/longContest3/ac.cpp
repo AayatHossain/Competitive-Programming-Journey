@@ -23,7 +23,6 @@ int dijkstra()
 {
     q.push({1, 0, 0});
     dist[1][0] = 0;
-    dist[1][1] = 0;
     while (!q.empty())
     {
         Pos p = q.top();
@@ -36,16 +35,13 @@ int dijkstra()
         {
             continue;
         }
-        // if(u==n){
-        //     break;
-        // }
-        
+
         for (auto x : g[u])
         {
             int v = x.first;
             int wt = x.second;
             if(!used){
-                if (c + wt < dist[v][1])
+                if (c + wt/2 < dist[v][1])
                 {
                     dist[v][1] = c + wt / 2;
                     q.push({v, 1, dist[v][1]});
@@ -65,7 +61,7 @@ signed main()
 {
     cin >> n >> m;
     g.resize(n + 1);
-    dist.resize(n + 1, vector<int>(2, INT_MAX));
+    dist.resize(n + 1, vector<int>(2, LLONG_MAX));
     for (int i = 1; i <= m; i++)
     {
         int s, d, w;
