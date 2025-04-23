@@ -1,88 +1,64 @@
 #include<bits/stdc++.h>
 using namespace std;
-void addEdge(vector<int> graph[], int src, int dst){
-    graph[src].push_back(dst);
-    graph[dst].push_back(src);
-}
-void bfs( vector<int>g[],vector<bool> &vis,  vector<int> &p,int s){
-    queue<int> q;
-    // set<int> cycleStart;
-    int start = -1;
-    int end = -1;
-    q.push(s);
-    vis[s] = true;
-    int found = 0;
-    while(!q.empty()){
-        int size = q.size();
-        for(int i = 0; i < size; i++){
-            int u = q.front();
-            q.pop();
-            
-            for(auto v: g[u]){
-                if(!vis[v]){
-                    q.push(v);
-                    vis[v] = true;
-                    p[v] = u;
-                    cout<<v<<" "<<p[v]<<endl;
-                }else{
-                    if(p[u] != v){
-                        found = 1;
-                        start = v;
-                        end = u;
-                        // cout<<p[u]+1<<" "<<start+1<<" "<<end+1<<endl;
-                        break;
-                    }
+#define N (int)1e5
+vector<int> g[N];
+vector<int> vis;
+vector<int> par;
+int cycleStart = -1;
+int cycleEnd = -1;
+
+bool dfs(int u, int parU){
+    vis[u] = true;
+    for(auto v : g[u]){
+        if(v==parU){
+            continue;
+        }else{
+            if(vis[v]){
+                cycleStart = v;
+                cycleEnd = u;
+                return true;
+            }else{
+                par[v] = u;
+                if(dfs(v, par[v])){
+                    return true;
                 }
             }
-        }
-        if(found){
-            break;
-        }
-    }
-    cout<<start+1<<" "<<end+1<<endl;
-    // return;
-    if(!found){
-        cout<<"IMPOSSIBLE"<<endl;
-    }else{
-        vector<int> route;
-        
-        route.push_back(start);
-        route.push_back(end);
-        
-        int curr = p[end];
-        
-        // route.push_back(d);
-        
-        while(curr != start && curr != -1){
             
-            route.push_back(curr);
-            curr = p[curr];
-            // for(int i = 0; i < route.size(); i++){
-            //     cout<<route[i] <<" ";
-            // }
-            // cout<<curr<<endl;
-            // return;
         }
-        route.push_back(start);
-        reverse(route.begin(), route.end());
-        cout<<route.size()<<endl;
-        for(auto x: route){
-            cout<<x+1<<" ";
-        }
-        cout<<endl;
     }
+    return false;
 }
+
 signed main(){
     int n,m;cin>>n>>m;
-    vector<int>g[n];
-    vector<bool> vis(n,false);
+    vis.assign(n, false);
+    par.assign(n, -1);
     for(int i = 0; i < m; i++){
         int x,y;cin>>x>>y;
         x--;y--;
-        addEdge(g,x,y);
+        g[x].push_back(y);
+        g[y].push_back(x);
     }
-    int src = 0;
-    vector<int> p(n,-1);
-    bfs(g,vis,p,src);
+    for(int i = 0; i < n; i++){
+        if(!vis[i] && dfs(i, par[i])){
+            break;
+        }
+    }
+    if(cycleStart==-1){
+        cout<<"IMPOSSIBLE"<<endl;
+    }else{
+        vector<int> cycle;
+        cycle.push_back(cycleStart);
+        for(int i = cycleEnd; i != cycleStart; i = par[i]){
+            cycle.push_back(i);
+        }
+        cycle.push_back(cycleStart);
+        cout<<cycle.size()<<endl;
+        for(int i = 0; i < cycle.size(); i++){
+            cout<<cycle[i]+1<<" ";
+        }
+        cycle.push_back(cycleStart);
+        cout<<endl;
+    }
     return 0;
 }
