@@ -45,7 +45,7 @@ void makePath(){
     pair<int,int> start = aStart;
     pair<int,int> end = aEnd;
     pair<int,int> temp = aEnd;
-    while(temp.first != aStart.first && temp.second != aStart.second){
+    while(temp != aStart){
         int vx = temp.first;
         int vy = temp.second;
         int ux = par[vx][vy].first;
@@ -73,8 +73,8 @@ int main(){
     bfs();
     aturn = true;
     g[aStart.first][aStart.second] = 0;
-    bfs();
     q.push({aStart.first,aStart.second});
+    bfs();
     if(possible){
         makePath();
         cout<<"YES"<<endl;
@@ -83,4 +83,5 @@ int main(){
     }else{
         cout<<"NO"<<endl;
     }
+    // cout<<aEnd.first<<" "<<aEnd.second<<endl;
 }
