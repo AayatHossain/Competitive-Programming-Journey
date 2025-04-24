@@ -1,48 +1,49 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<pair<int, int>> moves = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-void bfs(vector<vector<char>> &g, vector<vector<bool>> &vis, queue<pair<pair<int, int>, int>> &giants, vector<vector<int>> &time, int r, int c)
+int n, m;
+int g[200][200];
+pair<int, int> par[200][200];
+vector<pair<int, int>> dir = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+pair<int, int> aStart;
+bool aturn = false;
+bool possible = false;
+queue<pair<int, int>> q;
+int moves = 0;
+
+void bfs()
 {
-    int t = 0;
-    while (!giants.empty())
+    while (!q.empty())
     {
-        auto u = giants.front();
-        int ux = u.first.first;
-        int uy = u.first.second;
-        int currTime = u.second;
-        giants.pop();
-        for (auto v : moves)
+        pair<int, int> curr = q.front();
+        int ux = curr.first;
+        int uy = curr.second;
+        if (aturn && (ux == 0 || ux == n - 1 || uy == 0 || uy == m - 1))
         {
-            int nx = ux + v.first;
-            int ny = uy + v.second;
-            int valid = nx >= 0 && nx < r && ny >= 0 && ny < c && g[nx][ny] != '#'; 
+            moves = g[ux][uy] + 1;
+            possible = true;
+            return;
+        }
+        q.pop();
+        for (auto x : dir)
+        {
+            int vx = ux + x.first;
+            int vy = uy + x.second;
+            int valid = vx < n && vx >= 0 && vy < m && vy >= 0;
+            // int valid = 1;
             if (valid)
             {
-                if (vis[nx][ny])
+                int uTime = g[ux][uy];
+                int vTime = g[vx][vy];
+                if (uTime + 1 < vTime)
                 {
-                    if (time[nx][ny] > currTime + 1)
-                    {
-                        giants.push({{nx, ny}, currTime + 1});
-                        time[nx][ny] = currTime + 1;
-                        vis[nx][ny] = true;
-                    }
-                }
-                else
-                {
-                    giants.push({{nx, ny}, currTime + 1});
-                    time[nx][ny] = currTime + 1;
-                    vis[nx][ny] = true;
+                    g[vx][vy] = uTime + 1;
+                    q.push({vx, vy});
                 }
             }
         }
     }
-    for(int i = 0; i < r; i++){
-        for(int j = 0; j < c; j++){
-            cout<<time[i][j]<<" ";
-        }
-        cout<<endl;
-    }
 }
+
 int main()
 {
     int t;
@@ -50,32 +51,47 @@ int main()
     int c = 1;
     while (t--)
     {
-        int r, c;
-        cin >> r >> c;
-        vector<vector<char>> g(r, vector<char>(c));
-        vector<vector<bool>> v(r, vector<bool>(c, false));
-        int ji = -1, jj = -1;
-        queue<pair<pair<int, int>, int>> giants;
-        for (int i = 0; i < r; i++)
+        cin >> n >> m;
+        for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < c; j++)
+            for (int j = 0; j < m; j++)
             {
-                int x;
-                cin >> x;
-                g[i][j] = x;
-                if (x == 'J')
+                char c;
+                cin >> c;
+                if (c == 'F')
                 {
-                    ji = i;
-                    jj = j;
+                    g[i][j] = 0;
+                    q.push({i, j});
                 }
-                else if (x == 'F')
+                else if (c == '#')
+                    g[i][j] = 0;
+                else if (c == 'J')
                 {
-                    giants.push({{i, j}, 0});
+                    aStart.first = i;
+                    aStart.second = j;
                 }
+                else if (c == '.')
+                    g[i][j] = INT_MAX;
             }
         }
-        vector<vector<int>> time(r, vector<int>(c, INT_MAX));
-        bfs(g, v, giants, time,r,c);
+        bfs();
+        aturn = true;
+        g[aStart.first][aStart.second] = 0;
+        q.push({aStart.first, aStart.second});
+        bfs();
+        if (possible)
+        {
+            cout << "Case " << c << ": " << moves << '\n';
+        }
+        else
+        {
+            cout << "Case " << c << ": " << "IMPOSSIBLE" << '\n';
+        }
+        c++;
+        memset(g, -1, sizeof(g));
+        aturn = false;
+        possible = false;
+        q = queue<pair<int, int>>();
+        memset(par, 0, sizeof(par));
     }
-    return 0;
 }

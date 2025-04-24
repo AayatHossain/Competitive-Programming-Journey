@@ -51,7 +51,7 @@ void makePath(){
         int ux = par[vx][vy].first;
         int uy = par[vx][vy].second;
         if(vx - 1 == ux) ans += 'D';
-        if(vx + 1 == ux) ans += 'W';
+        if(vx + 1 == ux) ans += 'U';
         if(vy + 1 == uy) ans += 'L';
         if(vy - 1 == uy) ans += 'R';
         temp = {ux, uy}; 
