@@ -13,7 +13,7 @@ signed main(){
         edges.push_back({--u,--v,w});
     } 
     vector<int> par(n,-1);
-    vector<int> dist(n, LLONG_MAX);
+    vector<int> dist(n, 0);
     dist[0] = 0;
     int x = -1;
     for(int i = 0; i < n ; i++){
@@ -38,12 +38,15 @@ signed main(){
         }
         vector<int> path;
         int y = x;
-        do {
-            path.push_back(y);
-            y = par[y];
-        } while (y != x);
-        path.push_back(y);
-
+        while(1){
+            path.push_back(x);
+            x = par[x];
+            if(x == y){
+                path.push_back(x);
+                break;
+            }
+            
+        }
         reverse(path.begin(), path.end());
         cout<<"YES"<<endl;
         for(auto x: path){
