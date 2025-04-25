@@ -1,55 +1,39 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define int long long
-signed main(){
-    int t;cin>>t;
-    while(t--){
-        int n,k;cin>>n>>k;
+signed main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
         vector<int> a(n);
-        vector<int> b(n);
-        for(int i = 0; i < n; i++){
-            cin>>a[i];
+        for (int i = 0; i < n; i++)
+        {
+            cin >> a[i];
         }
-        for(int i = 0; i < n; i++){
-            cin>>b[i];
+        sort(a.begin(), a.end());
+        if (a.size() == 2)
+        {
+            cout << max(a[0], a[1] - a[0]) << endl;
         }
-        set<int> s;
-        int sum = 0;
-        for(int i = 0; i < n; i++){
-            if(b[i] != -1){
-                s.insert(a[i] + b[i]);
-                sum = a[i] + b[i];
+        else
+        {
+            int ans = INT_MIN;
+            for (int i = 1; i < n; i++)
+            {
+                ans = max(ans, a[i] - a[i - 1]);
+            }
+            if (ans == INT_MIN)
+            {
+                cout << a[0] << endl;
+            }
+            else
+            {
+                cout << ans << endl;
             }
         }
-        if(s.size() > 1){
-            cout<<0<<endl;
-        }else if(s.size() == 1){
-            int possible = 1;
-            for(int i = 0; i < n; i++){
-                int req = sum - a[i];
-                if(!(req >= 0 && req <= k)){
-                    cout<<0<<endl;
-                    possible = 0;
-                    break;
-                }
-            }
-            if(possible){
-                cout<<1<<endl;
-            }
-        }else{
-            if(a.size()==1){
-                cout<<k+1<<endl;
-            }else{
-                int minV = INT_MAX;
-                int maxV = INT_MIN;
-                for(int i = 0; i < n ; i++){
-                    minV = min(a[i], minV);
-                    maxV = max(a[i] , maxV);
-                }
-                int cap = maxV - minV;
-                cout<<k - cap + 1<<endl;
-            }
-        }
-
     }
 }
