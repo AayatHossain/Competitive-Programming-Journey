@@ -7,33 +7,28 @@ signed main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
+        string s; cin>>s;
+        vector<int> a;
+        for(int i = 0; i < s.size(); i++){
+            a.push_back(s[i] - '0');
         }
         sort(a.begin(), a.end());
-        if (a.size() == 2)
-        {
-            cout << max(a[0], a[1] - a[0]) << endl;
-        }
-        else
-        {
-            int ans = INT_MIN;
-            for (int i = 1; i < n; i++)
-            {
-                ans = max(ans, a[i] - a[i - 1]);
-            }
-            if (ans == INT_MIN)
-            {
-                cout << a[0] << endl;
-            }
-            else
-            {
-                cout << ans << endl;
+        // for(auto x: a){
+        //     cout<<x<<" ";
+        // }
+        int count = 9;
+        string ans;
+        for(int i = count; i >= 0; i--){
+            for(int j = 0; j < a.size(); j++){
+                if(a[j] >= i && a[j] != -1){
+                    ans+=to_string(a[j]);
+                    // cout<<a[j]<<" ";
+                    a[j] = -1;
+                    break;
+                }
             }
         }
+        cout<<ans<<endl;
+            
     }
 }
