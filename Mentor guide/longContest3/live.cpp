@@ -7,44 +7,55 @@ signed main()
     cin >> t;
     while (t--)
     {
-        int n;
-        string s;
-        cin >> n >> s;
-        int i = 0, j = 1;
-        set<string> se;
-        bool flag = 0;
-        string last;
-        string secondlast;
-        while (j < n)
-        {
-            string subStr;
-            subStr += s[i];
-            subStr += s[j];
-            
-            if (se.find(subStr) != se.end())
-            {
-                   
-                    cout << "YES" << endl;
-                    flag = 1;
-                    break;
-                
+        int n; cin>>n;vector<int> a(n);
+        int small = LLONG_MAX;
+        int smallIndex = -1;
+        for(int i = 0;i < n; i++){
+            cin>>a[i];
+            if(abs(a[i]) < small){
+                smallIndex = i;
+                small = abs(a[i]);
             }
-            else
-            {
-                se.insert(subStr);
-                // cout<<subStr<<endl;
-                if(j < n && s[j] == s[j+1] && s[j]==s[i]){
-                    i = j + 1;
-                    j = i + 1;
-                }else{
-                    i++;j++;
-                }
+        }
+        // cout<<small<<endl;
+        for(int i = n - 2; i >= smallIndex; i--){
+            if(a[i] >= 0 && a[i+1] >= 0){continue;}
+            if(a[i] <= 0 && a[i+1] <= 0){
+                a[i] = abs(a[i]);
+                a[i+1] = abs(a[i+1]);
+            }else if(a[i] < 0){
+                continue;
+            }else{
+                a[i] = - a[i];
+                a[i+1] = abs(a[i+1]);
             }
            
         }
-        if (!flag)
-        {
-            cout << "NO" << endl;
+        // for(int i = 0; i < n; i++){
+        //     cout<<a[i]<<" ";
+        // }
+        // cout<<endl;
+        for(int i = 1; i <= smallIndex; i++){
+            if(a[i] >= 0 && a[i-1] >= 0){continue;}
+            if(a[i] <= 0 && a[i-1] <= 0){
+                a[i] = abs(a[i]);
+                a[i-1] = abs(a[i-1]);
+            }else if(a[i] < 0){
+                continue;
+            }else{
+                a[i] = - a[i];
+                a[i-1] = abs(a[i-1]);
+            }
         }
+        // for(int i = 0; i < n; i++){
+        //     cout<<a[i]<<" ";
+        // }
+        // cout<<endl;
+        int s =0 ;
+        for(int i = 0; i < n; i++){
+            s+=a[i];
+        }
+        cout<<s<<endl;
+
     }
 }
