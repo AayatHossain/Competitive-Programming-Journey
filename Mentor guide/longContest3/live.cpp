@@ -20,36 +20,27 @@ signed main()
             string subStr;
             subStr += s[i];
             subStr += s[j];
-            if (j == n - 2)
-            {
-                secondlast = subStr;
-            }
-            if (j == n - 1)
-            {
-                last = subStr;
-            }
+            
             if (se.find(subStr) != se.end())
             {
-                if (j == n - 1 && last == secondlast)
-                {
-
-                    j++;
-                    i++;
-                    continue;
-                }
-                else
-                {
+                   
                     cout << "YES" << endl;
                     flag = 1;
                     break;
-                }
+                
             }
             else
             {
                 se.insert(subStr);
+                // cout<<subStr<<endl;
+                if(j < n && s[j] == s[j+1] && s[j]==s[i]){
+                    i = j + 1;
+                    j = i + 1;
+                }else{
+                    i++;j++;
+                }
             }
-            i++;
-            j++;
+           
         }
         if (!flag)
         {
