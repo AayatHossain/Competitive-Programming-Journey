@@ -1,49 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define int long long
+bool palindrome(string s){
+    int i = 0, j = s.size() - 1;
+    while(i < j){
+        if(s[i]!=s[j]){
+            return false;
+        }else{
+            i++; j--;
+        }
+    }
+    return true;
+}
 signed main()
 {
     int t;
     cin >> t;
     while (t--)
     {
-        int n; char c; string s;cin>>n>>c>>s;
-        char last, secLast;
-        secLast = s[n-2];
-        last = s[n-1];
-        int count = 0;
-        for(int i = 0; i < n; i++){
-            if(s[i] != c){count++;}
-        }
-        if(count==0){
+        int n;cin>>n;string s;cin>>s;
+        int ans = LLONG_MAX;
+        if(palindrome(s)){
             cout<<0<<endl;
-        }else{
-            vector<int> ans;
-            bool ok = false;
-            for(int i = 2; i <= n; i++){
-                ok = false;
-                for(int j = i; j <= n; j+=i ){
-                    if(s[j-1] == c){
-                        ok = true;
+            continue;
+        }
+        for(char c = 'a'; c <= 'z'; c++){
+            string newString;
+            for(int j = 0; j < n; j++){
+                if(s[j] != c){
+                    newString+=s[j];
+                }
+            }
+            if(palindrome(newString)){
+                int count = 0;
+                int i = 0, j = s.size() - 1;
+                while(i < j){
+                    if(s[i]==s[j]){
+                        i++; j--;
+                    }else if(s[i]==c && s[j] != c){
+                        i++; count++;
                     }else{
-                        ok = false;
-                        break;
+                        j--; count++;
                     }
                 }
-                if(ok){
-                    ans.push_back(i);
-                    break;
-                }
+            //    if(count==1){
+            //     cout<<c<<endl;
+            //    }
+                ans = min(ans, count);
             }
-            if(!ok){
-                ans.push_back(n-1);
-                ans.push_back(n);
-            }
-            cout<<ans.size()<<endl;
-            for(auto x: ans){
-                cout<<x<<" ";
-            }
-            cout<<endl;
+        }
+        if(ans==LLONG_MAX){
+            cout<<-1<<endl;
+        }else{
+            cout<<ans<<endl;
         }
 
     }
