@@ -14,12 +14,10 @@ signed main()
         for(int i = 0; i < n; i++){
             if(s[i]=='0'){
                 z++;
-            }
+            }adasasda
         }
         if(z==1){
             cout<<"BOB"<<endl;
-        }else if(z % 4 == 0){
-            cout<<"DRAW"<<endl;
         }else if(z % 2 == 0){
             cout<<"BOB"<<endl;
         }else{
