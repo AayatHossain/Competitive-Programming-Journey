@@ -1,40 +1,34 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define int long long
-vector<int> v(31);
-signed main(){
-    for(int i = 0; i <= 30; i++){
-        v[i] = 1LL<<i;
-    }
-    int t;cin>>t;
-    while(t--){
-        int n,q; cin>>n>>q;
-        vector<int> a(n);
-        vector<int> x(q);
-        for(int i = 0; i < n; i++){
-            cin>>a[i];
-        }
-        for(int i = 0; i < q; i++){
-            cin>>x[i];
-        }
-        int last = -1;
-        for(int i = 0; i < q; i++){
-            int pow = x[i];
-            int v1 = v[pow];
-            int v2 = v[pow-1];
-            if(last == -1 || last > v1){
-                for(int j = 0; j < n; j++){
-                    if(a[j] % v1 == 0){
-                        a[j] += v2;
-                    }
+signed main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;cin>>n;vector<int>a(n);for(int i=0;i<n;i++)cin>>a[i];
+        vector<int>p(n); p[0] = a[0]; for(int i=1;i<n;i++)p[i]=p[i-1]+a[i];
+        int ans=LLONG_MIN;
+        for(int k=1;k<=n/2;k++){
+            int M=LLONG_MIN;
+            int m=LLONG_MAX;
+            if(n%k==0){
+                M = max(M,p[k-1]);
+                m = min(m, p[k-1]);
+                for(int i=(k+k)-1; i<n; i+=k){
+                    int s = p[i]-p[i-k];
+                    M = max(M,s);
+                    m = min(m, s);
                 }
-                last = v1;
+                ans = max(ans, abs(M-m));
             }
         }
-        for(int i = 0; i < n; i++){
-            cout<<a[i]<<" ";
-        }
-        cout<<endl;
+        ans = max(ans, 0LL);
+        cout<<ans<<endl;
+
+
+        
     }
     return 0;
 }
