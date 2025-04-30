@@ -8,27 +8,40 @@ signed main()
     cin >> t;
     while (t--)
     {
-        int n; cin>>n;
-        vector<int> a(n);
-        vector<int>s(n);
-        vector<int> m(n,0);
-        int mv = LLONG_MIN;
+        int n,k,a,b; cin>>n>>k>>a>>b;
+        vector<vector<int>> cities(n, vector<int>(2));
+        pair<int,int> s;
+        pair<int,int> d;
         for(int i = 0; i < n; i++){
-            cin>>a[i];
-            if(i > 0){
-                m[i] = max(m[i-1],  a[i-1]);
+            cin>>cities[i][0]>>cities[i][1];
+            if(i==a-1){
+                s = {cities[i][0], cities[i][1]};
             }
-            mv = max(mv, a[i]);
+            if(i==b-1){
+                d = {cities[i][0], cities[i][1]};
+            }
         }
-        s[n-1] = a[n-1];
-        for(int i = n - 2; i>=0;i--){
-            s[i] = s[i+1] + a[i];
+        if(a <= k && b <= k){
+            cout<<0<<endl;
+        }else{
+            int ans1 = LLONG_MAX;
+            int ans2 = LLONG_MAX;
+           if(k >= 2){
+            int costa = LLONG_MAX;
+            int costb = LLONG_MAX;
+            for(int i = 0; i < k; i++){
+                costa = min(costa, abs(s.first-cities[i][0])+abs(s.second-cities[i][1]));
+            }
+            for(int i = 0; i < k; i++){
+                costb = min(costb, abs(d.first-cities[i][0])+abs(d.second-cities[i][1]));
+            }
+            ans1 = costa+costb;
+           }
+                ans2 = abs(s.first - d.first) + abs(s.second - d.second);
+           
+            cout<<min(ans1, ans2)<<endl;
         }
-        cout<<mv;
-        for(int i = n-1; i >= 1; i--){
-            cout<<" "<<s[i] + m[i];
-        }
-        cout<<'\n';
 
     }
+    return 0;
 }
