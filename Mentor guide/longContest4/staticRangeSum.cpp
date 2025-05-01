@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-const int N = 1e5+7;
+const int N = 2e5+7;
 vector<int>a(N);
-vector<int>segTree(4*N+1);
+vector<int>segTree(4*N);
 void build(int i, int l, int r){
     if(l==r){
         segTree[i] = a[l];
