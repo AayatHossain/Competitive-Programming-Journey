@@ -34,7 +34,7 @@ void build(int i, int l, int r){
 }
 node get(int i, int l, int r, int s, int e){
     if(r<s || l >e){
-        return node(LLONG_MIN/2);
+        return node(-100000);
     }
     if(l>=s && r <=e){
         return st[i];

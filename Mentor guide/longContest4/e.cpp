@@ -7,14 +7,11 @@ struct node{
     int a=0;
     int b=0;
     int c=0;
-    int val(int i){
-        return a*i*i + b*i + c;
-    }
     node(int v){
         val = v;
     }
     node(){
-        a=b=c=0;
+
     }
 };
 int n,q;
@@ -26,8 +23,8 @@ void build(int i, int l, int r){
         return;
     }
     int mid = l+(r-l)/2;
-    build(2*i+1,l,mid);
-    build(2*i+2,mid+1,r);
+    build(2*i,l,mid);
+    build(2*i+1,mid+1,r);
     st[i] = 0;
 }
 void update(int i, int l, int r, int s, int e, int v, int begL){
@@ -41,28 +38,40 @@ void update(int i, int l, int r, int s, int e, int v, int begL){
         return;
     }
     int mid = l+(r-l)/2;
-    update(2*i+1, l,mid,s,e,v,begL);
-    update(2*i+2, mid+1,r,s,e,v,begL);
+    update(2*i, l,mid,s,e,v,begL);
+    update(2*i+1, mid+1,r,s,e,v,begL);
 }
 int get(int i, int l,int r,int index){
     if(l==r && l==index){
         int sum = st[i].val;
+        // int sum = a[index];
+        sum += st[i].a*index*index + st[i].b*2*index+st[i].c;
+        return sum;
+    }
+    if(l==r && l!=index){
+        return 0;
+    }
+    int mid = l+(r-l)/2;
+    if(index <= mid){
+        return get(2*i, l,mid,index)+(st[i].a*index*index + st[i].b*2*index+st[i].c);
+    }else{
+        return get(2*i+1, mid+1,r,index)+(st[i].a*index*index + st[i].b*2*index+st[i].c);
     }
 }
 signed main(){
     cin>>n>>q;
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i <= n; i++){
         cin>>a[i];
     }
-    build();
+    build(1,1,n);
     for(int i = 0; i < q; i++){
         int x;cin>>x;
         if(x==1){
-            int l,r,v; cin>>l>>r>>x;
-            update();
+            int l,r,v; cin>>l>>r>>v;
+            update(1,1,n,l,r,v,l);
         }else{
-            int indx;
-            cout<<get()<<endl;
+            int indx;cin>>indx;
+            cout<<get(1,1,n,indx)<<endl;
         }
     }
     return 0;
