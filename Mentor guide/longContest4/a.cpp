@@ -1,53 +1,62 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
+int n, m;
 const int N = 5e4+7;
-vector<int> segTree(4*N);
-vector<int> segTree2(4*N);
 vector<int> a(N);
-int n,q;
-
+struct node{
+    int sum;
+    int pref;
+    int suff;
+    int best;
+    node() {
+        sum = pref = suff = best = 0;
+    }
+    node(int val){
+        sum=pref=suff=best=val;
+    }
+};
+vector<node>st(4*N);
+node merge(node left, node right){
+    node temp(0);
+    temp.sum = left.sum + right.sum;
+    temp.pref = max(left.pref, left.sum + right.pref);
+    temp.suff = max(right.suff, right.sum + left.suff);
+    temp.best = max(left.best, max(right.best, left.suff + right.pref));
+    return temp;
+}
 void build(int i, int l, int r){
     if(l==r){
-        segTree[i] = a[l];
-        segTree2[i] = a[l];
+        st[i] = node(a[l]);
         return;
     }
     int mid = l + (r-l)/2;
-    build(2*i+1, l, mid);
-    build(2*i+2, mid+1, r);
-    segTree[i] = segTree[2*i+1] + segTree[2*i+2];
-    segTree2[i] = max(segTree[i],max(segTree[2*i+1] , segTree[2*i+2]));
+    build(2*i, l, mid);
+    build(2*i+1, mid + 1, r);
+    st[i] = merge(st[2*i], st[2*i+1]);
 }
-int query(int i, int l, int r, int s, int e){
-    if(l > e || r < s){
-        return LLONG_MIN;
+node get(int i, int l, int r, int s, int e){
+    if(r < s || l > e){
+        return node(-1000000);
     }
-    if(l>=s && r <= e){
-        return segTree2[i];
+    if(l >= s && r <= e){
+        return st[i];
     }
-    int mid = l+(r-l)/2;
-    int v1 = query(2*i+1,l,mid,s,e);
-    int v2 = query(2*i+2,mid+1,r,s,e);
-    return max(v1,v2);
+    int mid = l + (r-l)/2;
+    node n1 = get(2*i, l, mid, s, e);
+    node n2 = get(2*i+1, mid + 1, r, s, e);
+    node final = merge(n1, n2);
+    return final;
 }
-
 signed main(){
-    
-        
-        cin>>n;
-        for(int i = 0; i < n; i++){
-            cin>>a[i];
-        }
-        cin>>q;
-        build(0, 0, n-1);
-
-        for(int i = 0;i < q; i++){
-            int x,y; cin>>x>>y;
-            x--;y--;
-            int ans = query(0, 0, n-1, x, y);
-            cout<<ans<<endl;
-        }
-        
-    
+    cin>>n;
+    for(int i = 1; i <= n; i++)cin>>a[i];
+    build(1,1,n);
+    cin>>m;
+    for(int i = 0; i < m; i++){
+        int x,y;cin>>x>>y;
+        node ans = get(1,1,n,x,y);
+        cout<<ans.best<<endl;
+    }
+    return 0;
 }
