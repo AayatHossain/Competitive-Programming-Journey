@@ -5,7 +5,7 @@ int n, m;
 const int N = 5e4+7;
 vector<int> a(N);
 struct node{
-    int sum;
+    int sum; 
     int pref;
     int suff;
     int best;
@@ -19,10 +19,10 @@ struct node{
 vector<node>st(4*N);
 node merge(node left, node right){
     node temp(0);
-    temp.sum = left.sum + right.sum;
-    temp.pref = max(left.pref, left.sum + right.pref);
-    temp.suff = max(right.suff, right.sum + left.suff);
-    temp.best = max(left.best, max(right.best, left.suff + right.pref));
+    temp.sum = left.sum + right.sum;//curr sum
+    temp.pref = max(left.pref, left.sum + right.pref);  //max prefix of left or from left sum to right prefix
+    temp.suff = max(right.suff, right.sum + left.suff); //max suffix of right or from right sum to left suffix
+    temp.best = max(left.best, max(right.best, left.suff + right.pref)); //lef.suff + right.pref will also act like leftsum plus right sum if its the max value. so we dont need to write it seperately
     return temp;
 }
 void build(int i, int l, int r){
@@ -45,7 +45,7 @@ node get(int i, int l, int r, int s, int e){
     int mid = l + (r-l)/2;
     node n1 = get(2*i, l, mid, s, e);
     node n2 = get(2*i+1, mid + 1, r, s, e);
-    node final = merge(n1, n2);
+    node final = merge(n1, n2); //best from left and right taken.
     return final;
 }
 signed main(){
