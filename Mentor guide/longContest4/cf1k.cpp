@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define int long long
 bool isSqr(int n){
     int m = sqrt(n);
     return m*m == n;
