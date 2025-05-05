@@ -41,7 +41,7 @@ signed main(){
             }
         }
         for(char c = 'a'; c <= 'z' && !found; c++){
-            for(int d = 'a'; d <= 'z'; d++){
+            for(int d = 'a'; d <= 'z' && !found; d++){
                 for(int e = 'a'; e<='z'; e++){
                     string str; str+=c; str+=d; str+=e;
                     if(!present(str,s)){

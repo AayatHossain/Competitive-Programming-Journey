@@ -1,3 +1,5 @@
-ac
-f
-b
+YES
+YES
+NO
+YES
+NO
