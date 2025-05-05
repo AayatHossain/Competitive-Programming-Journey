@@ -8,11 +8,20 @@ signed main(){
     int t;cin>>t;
     while(t--){
         int n; cin>>n;
-        if((n%2==0 && isSqr(n/2)) || (n%4==0 && isSqr(n/4))){
-            cout<<"YES"<<endl;
-        }else{
-            cout<<"NO"<<endl;
+        vector<int>a(n);
+        for(int i = 0; i < n; i++)cin>>a[i];
+        vector<int>diff(n);
+        map<int,int> m;
+        for(int i = 0; i < n ; i++){
+            diff[i] = a[i] - i;
+            m[diff[i]]++;
         }
+        int count = 0;
+        for(auto x: m){
+            count += (x.second*(x.second-1))/2;
+        }
+        cout<<count<<endl;
+        
     }
     return 0;
 }
