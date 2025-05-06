@@ -5,7 +5,7 @@ const int N = 1e5+7;
 struct node{
     int leftmost,rightmost,leftmostfreq,rightmostfreq, ans;
     node(){
-
+        leftmost = rightmost = leftmostfreq = rightmostfreq = ans = 0;
     }
     node(int lm,int rm,int lmf,int rmf, int answer){
         leftmost = lm;
@@ -18,8 +18,8 @@ struct node{
 vector<node> st(4*N);
 vector<int> a(N);
 
-void merge(node &curr, node &left, node &right){
-
+node merge(node left, node right){
+    node curr = node();
     if(left.leftmost == right.rightmost){
         curr.leftmost = left.leftmost;
         curr.rightmost = right.rightmost;
@@ -56,7 +56,7 @@ void merge(node &curr, node &left, node &right){
         curr.rightmostfreq = right.rightmostfreq;
         curr.ans = max(left.ans , right.ans);
     }
-
+    return curr;
 }
 
 void build(int i, int l, int r){
@@ -68,18 +68,32 @@ void build(int i, int l, int r){
     int m = l+(r-l)/2;
     build(2*i, l,m);
     build(2*i+1, m+1,r);
-    merge(st[i], st[2*i], st[2*i+1]);
+    st[i] = merge(st[2*i], st[2*i+1]);
+}
+
+node get(int i, int l, int r, int s, int e){
+    if(l > e || r < s){
+        return node(-1,-1,-1e6,-1e6,-1e6);
+    }
+    if( l >= s && r <= e){
+        return st[i];
+    }
+    int m = l + (r-l)/2;
+    node n1 = get(2*i, l, m, s, e);
+    node n2 = get(2*i+1, m+1, r, s, e);
+    node finalNode = merge(n1,n2);
+    return finalNode;
 }
 
 signed main(){
     int n,q; cin>>n>>q;
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i <= n; i++){
         cin>>a[i];
     }
     build(1,1,n);
     for(int i = 0; i < q; i++){
         int s,e; cin>>s>>e;
-        cout<<get()<<endl;
+        cout<<get(1,1,n,s,e).ans<<endl;
     }
     int x;cin>>x;
 }
