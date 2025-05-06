@@ -4,7 +4,7 @@ using namespace std;
 int n, m;
 const int N = 5e4+7;
 vector<int> a(N);
-struct node{asdadasdasasdasdasd
+struct node{
     int sum;
     int pref;
     int suff;
