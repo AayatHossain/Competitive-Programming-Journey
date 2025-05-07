@@ -18,50 +18,40 @@ struct node{
 vector<node> st(4*N);
 vector<int> a(N);
 
-node merge(node left, node right){
-    node curr;
-    
-    if (left.ans == 0)
+node merge(node left, node right) {
+    if (left.ans == -1e6)
         return right;
-    if (right.ans == 0)
+    if (right.ans == -1e6)
         return left;
 
-    if(left.leftmost == right.rightmost){
-        curr.leftmost = left.leftmost;
-        curr.rightmost = right.rightmost;
+    node curr;
+    curr.leftmost = left.leftmost;
+    curr.rightmost = right.rightmost;
+    
+    if (left.leftmost == right.rightmost) {
         curr.leftmostfreq = left.leftmostfreq + right.rightmostfreq;
         curr.rightmostfreq = left.leftmostfreq + right.rightmostfreq;
         curr.ans = left.leftmostfreq + right.rightmostfreq;
-
     }
-    else if(left.leftmost == right.leftmost){
-
-        curr.leftmost = left.leftmost;
-        curr.rightmost = right.rightmost;
+    else if (left.leftmost == right.leftmost) {
         curr.leftmostfreq = left.leftmostfreq + right.leftmostfreq;
         curr.rightmostfreq = right.rightmostfreq;
         curr.ans = max(left.leftmostfreq + right.leftmostfreq, right.ans);
-
-    }else if(right.rightmost == left.rightmost){
-
-        curr.leftmost = left.leftmost;
-        curr.rightmost = right.rightmost;
+    }
+    else if (right.rightmost == left.rightmost) {
         curr.leftmostfreq = left.leftmostfreq;
         curr.rightmostfreq = left.rightmostfreq + right.rightmostfreq;
-        curr.ans = max(left.ans , left.rightmostfreq + right.rightmostfreq);
-
-    }else if(left.rightmost == right.leftmost){
-        curr.leftmost = left.leftmost;
-        curr.rightmost = right.rightmost;
+        curr.ans = max(left.ans, left.rightmostfreq + right.rightmostfreq);
+    }
+    else if (left.rightmost == right.leftmost) {
         curr.leftmostfreq = left.leftmostfreq;
         curr.rightmostfreq = right.rightmostfreq;
-        curr.ans = max(left.ans , max(right.ans, left.rightmostfreq + right.leftmostfreq));
-    }else{
-        curr.leftmost = left.leftmost;
-        curr.rightmost = right.rightmost;
+        curr.ans = max({left.ans, right.ans, left.rightmostfreq + right.leftmostfreq});
+    }
+    else {
         curr.leftmostfreq = left.leftmostfreq;
         curr.rightmostfreq = right.rightmostfreq;
-        curr.ans = max(left.ans , right.ans);
+        curr.ans = max(left.ans, right.ans);
     }
     return curr;
 }
@@ -80,7 +70,7 @@ void build(int i, int l, int r){
 
 node get(int i, int l, int r, int s, int e){
     if(l > e || r < s){
-        return node(0,0,0,0,0);
+        return node(-1e6,-1e6,-1e6,-1e6,-1e6);
     }
     if( l >= s && r <= e){
         return st[i];
@@ -93,14 +83,20 @@ node get(int i, int l, int r, int s, int e){
 }
 
 signed main(){
-    int n,q; cin>>n>>q;
-    for(int i = 1; i <= n; i++){
-        cin>>a[i];
+    while(true){
+        int n,q; cin>>n;
+        if(n==0){
+            break;
+        }
+        cin>>q;
+        for(int i = 1; i <= n; i++){
+            cin>>a[i];
+        }
+        build(1,1,n);
+        for(int i = 0; i < q; i++){
+            int s,e; cin>>s>>e;
+            cout<<get(1,1,n,s,e).ans<<endl;
+        }
     }
-    build(1,1,n);
-    for(int i = 0; i < q; i++){
-        int s,e; cin>>s>>e;
-        cout<<get(1,1,n,s,e).ans<<endl;
-    }
-    int x;cin>>x;
+    
 }
