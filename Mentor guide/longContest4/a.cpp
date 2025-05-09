@@ -3,7 +3,7 @@ using namespace std;
 #define int long long
 int n, m;
 const int N = 5e4+7;
-vector<int> a(N);
+vector<int> a(N);hgfhfhgf
 struct node{
     int sum;
     int pref;
