@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "m - klever permutation": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
