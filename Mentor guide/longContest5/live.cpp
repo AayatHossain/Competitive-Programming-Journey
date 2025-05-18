@@ -4,32 +4,38 @@ int main(){
     int t;
     cin>>t;
     while(t--){
-        int n; cin>>n;
-        vector<int>a(n);
-        int c1 = 0, c0 = 0;
-        for(int i  =0;i < n; i++){
-            cin>>a[i];
-            if(a[i]==1){
-                c1++;
+        int n,m,a,b;
+        cin>>n>>m>>a>>b;
+        int moves = 0;
+        int i = a, j = b;
+        int right,left,up,down;
+        while(!(n==1 && m==1)){
+            right = (m-j)*n;
+            left = (j-1)*n;
+            up = (i-1)*m;
+            down = (n-i)*m;
+            vector<pair<int,char>> v(4);
+            v[0] = {right,'r'};
+            v[1] = {left,'l'};
+            v[2] = {up,'u'};
+            v[3] = {down,'d'};
+            sort(v.begin(), v.end());
+            auto x = v[3];
+            char c = x.second;
+            if(c=='u'){
+                n=n-i+1;
+            }else if(c=='d'){
+                n=i;
+            }else if(c=='l'){
+                m=m-j+1;
             }else{
-                c0++;
+                m=j;
             }
+            i = n/2 + 1;
+            j = m/2 + 1;
+            moves++;
         }
-        int consecutiveZero = 0;
-        for(int i = 1; i < n; i++){
-            if(a[i]==a[i-1] && a[i] == 0){
-                consecutiveZero = 1;
-                break;
-            }
-        }
-        if(c1==n || c0 == n){
-            cout<<"YES"<<endl;
-        }else if(consecutiveZero == 1){
-            cout<<"YES"<<endl;
-        }else{
-            cout<<"NO"<<endl;
-        }
-
+        cout<<moves<<endl;
     }
     return 0;
 }
