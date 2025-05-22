@@ -1,16 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long
-signed main(){
-    int t;
-    cin>>t;
-    while(t--){
-        int n,m,a,b;
-        cin>>n>>m>>a>>b;
-        int moves = 0;
-        int i = a, j = b;
-        int right,left,up,down;
-        while(!(n==1 && m==1)){
+int check(int n, int m, int i, int j){
+    int moves = 0;
+    int right,left,up,down;
+        while(n * m > 1){
+            i = (n+1)/2;
+            j = (m+1)/2;
+
             right = (m-j)*n;
             left = (j-1)*n;
             up = (i-1)*m;
@@ -32,11 +29,22 @@ signed main(){
             }else{
                 m=j;
             }
-            i = n/2 + 1;
-            j = m/2 + 1;
             moves++;
         }
-        cout<<moves<<endl;
+        return moves;
+}
+signed main(){
+    int t;
+    cin>>t;
+    while(t--){
+        int n,m,a,b;
+        cin>>n>>m>>a>>b;
+        int ans = LLONG_MAX;
+        ans = min(ans, check(n-a+1, m, a, b));
+        ans = min(ans, check(a, m, a, b));
+        ans = min(ans, check(n, m-b+1, a, b));
+        ans = min(ans, check(n, b, a, b));
+        cout<<ans+1<<endl;
     }
     return 0;
 }
