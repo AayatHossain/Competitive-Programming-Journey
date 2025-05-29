@@ -8,7 +8,7 @@ package com.mycompany.labassignmentq2;
  *
  * @author User
  */
-public abstract class AbstractUser extends BookList {
+public abstract class AbstractUser {
     abstract void login();
     abstract void logout();
     abstract void viewProfile();

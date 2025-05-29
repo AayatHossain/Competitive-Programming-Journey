@@ -38,12 +38,12 @@ public class Librarian extends AbstractUser implements BookHandler {
     @Override
     public void addBook(String title){
         System.out.println("Librarian with ID- "+ID+" has added the book titled: "+title);
-        books.add(title);
+        BookList.books.add(title);
     }
     @Override
     public void removeBook(String title){
         System.out.println("Librarian with ID- "+ID+" has removed the book titled: "+title);
-        books.remove(title);
+        BookList.books.remove(title);
     }
     @Override
     public void manageBook(String title){

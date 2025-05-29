@@ -30,12 +30,12 @@ public class Member extends AbstractUser implements BookHandler {
     @Override
     public void borrowBook(String title){
         System.out.println("Member with ID- "+ID+" has borrowed the book titled: "+title);
-        books.remove(title);
+        BookList.books.remove(title);
     }
     @Override
     public void returnBook(String title){
         System.out.println("Member with ID- "+ID+" has returned the book titled: "+title);
-        books.add(title);
+        BookList.books.add(title);
     }
     @Override
     public void addBook(String title){

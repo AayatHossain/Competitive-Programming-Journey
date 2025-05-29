@@ -10,28 +10,5 @@ package com.mycompany.labassignmentq2;
  */
 import java.util.*;
 public class BookList {
-    List<String> books;
-  
-    BookList(String... initialBooks) {
-        books = new ArrayList<>();
-        for (String book : initialBooks) {
-            books.add(book);
-        }
-    }
-    void add(String s){
-        books.add(s);
-    }
-    void remove(String s){
-        books.remove(s);
-    }
-    void manage(String s){
-        if(books.contains(s)){
-            System.out.println("Managing book: "+s);
-        }
-    }
-    void showBooks(){
-        for(String s: books){
-            System.out.print(s+" ");
-        }
-    }
+    public static List<String> books = new ArrayList<>();
 }
