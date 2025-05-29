@@ -11,4 +11,11 @@ package com.mycompany.labassignmentq2;
 import java.util.*;
 public class BookList {
     public static List<String> books = new ArrayList<>();
+    public static void showBooks(){
+        System.out.print("Books currently available: ");
+        for(String book: books){
+            System.out.print(book + ", ");
+        }
+        System.out.println();
+    }
 }

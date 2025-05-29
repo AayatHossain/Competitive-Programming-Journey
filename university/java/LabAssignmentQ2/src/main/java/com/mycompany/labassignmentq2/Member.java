@@ -17,24 +17,26 @@ public class Member extends AbstractUser implements BookHandler {
     }
     @Override
     void login(){
-        System.out.println("Member with ID- "+ID+" and password-"+password+" has logged in");
+        System.out.println("Member with ID - "+ID+" and password - "+password+" has logged in");
+        LoggedInUsers.addUser(ID, password);
     }
     @Override
     void logout(){
-        System.out.println("Member with ID- "+ID+" and password-"+password+" has logged out");
+        System.out.println("Member with ID - "+ID+" and password - "+password+" has logged out");
+        LoggedInUsers.removeUser(ID, password);
     }
     @Override
     void viewProfile(){
-        System.out.println("Member with ID- "+ID+" and password-"+password+" is viewing profile");
+        System.out.println("Member with ID - "+ID+" and password - "+password+" is viewing profile");
     }
     @Override
     public void borrowBook(String title){
-        System.out.println("Member with ID- "+ID+" has borrowed the book titled: "+title);
+        System.out.println("Member with ID - "+ID+" has borrowed the book titled: "+title);
         BookList.books.remove(title);
     }
     @Override
     public void returnBook(String title){
-        System.out.println("Member with ID- "+ID+" has returned the book titled: "+title);
+        System.out.println("Member with ID - "+ID+" has returned the book titled: "+title);
         BookList.books.add(title);
     }
     @Override

@@ -4,34 +4,36 @@
  */
 package com.mycompany.labassignmentq2;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * @author User
  */
-class pair{
-    String id;
-    String password;
-    pair(String id, String password){
-        this.id = id;
-        this.password = password;
-    }
-    
-}
 public class LoggedInUsers {
-    public static List<pair> users = new ArrayList<>();
-    public void addUser(String id, String password){
-        pair p = new pair(id, password);
-        users.add(p);
+    public static HashMap<String, String> users = new HashMap<>();
+
+    public static void addUser(String id, String password) {
+        users.put(id, password);
+        
     }
-    public void removeUser(String id, String password){
-        pair p = new pair(id, password);
-        for(pair currentUser : users){
-            if(currentUser.id==id && currentUser.password==password){
-                users.remove(p);
-            }
+
+    public static void removeUser(String id, String password) {
+        if (password.equals(users.get(id))) {
+            users.remove(id);
+            
+        }
+    }
+
+    public static void printAllUsers() {
+        if (users.isEmpty()) {
+            System.out.println("No users are currently logged in.");
+            return;
+        }
+    
+        System.out.println("Logged-in users:");
+        for (Map.Entry<String, String> entry : users.entrySet()) {
+            System.out.println("ID: " + entry.getKey() + ", Password: " + entry.getValue());
         }
     }
 }
