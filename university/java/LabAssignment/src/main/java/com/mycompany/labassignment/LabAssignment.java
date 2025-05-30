@@ -17,19 +17,19 @@ public class LabAssignment {
         
         System.out.println("Employee details:");       
         e.work();
-        System.out.println(e.calculateBonus(0.5));
+        System.out.println("Bonus for employee "+e.name+": "+e.calculateBonus(0.5));
         
         System.out.println();
         System.out.println("Manager details:");
         m.work();
-        System.out.println(m.calculateBonus(0.6));
+        System.out.println("Bonus for manager "+m.name+": "+m.calculateBonus(0.6));
         m.evaluateTeamPerformance();
         m.conductTeamMeeting();
         
         System.out.println();
         System.out.println("Director details:");
         d.work();
-        System.out.println(d.calculateBonus(0.7));
+        System.out.println("Bonus for director "+d.name+": "+d.calculateBonus(0.7));
         d.setCompanyStrategy();
         d.evaluateManagers();
         
