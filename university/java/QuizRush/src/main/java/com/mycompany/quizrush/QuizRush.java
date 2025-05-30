@@ -13,21 +13,41 @@ public class QuizRush {
 
     static Scanner scanner = new Scanner(System.in);
 
+    static Map<String, QuizGiver> allUsers = new HashMap<>();
+
     public static void main(String[] args) {
         System.out.println("🎉 Welcome to QuizRush!");
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
-        QuizGiver user = new QuizGiver(name);
 
         while (true) {
-            Quiz selectedQuiz = chooseGenre();
-            runQuiz(selectedQuiz, user);
-
-            System.out.print("\nType 'exit' to quit or press Enter to play again: ");
+            System.out.print("\nType 'exit' to quit, 'play' to play, or 'leaderboard' to view scores: ");
             String input = scanner.nextLine().trim().toLowerCase();
+
             if (input.equals("exit")) {
-                System.out.println("👋 Thanks for playing, " + name + "!");
+                System.out.println("👋 Thanks for playing!");
                 break;
+            } else if (input.equals("play")) {
+                System.out.print("Enter your username: ");
+                String name = scanner.nextLine().trim();
+
+                QuizGiver user;
+                if (allUsers.containsKey(name)) {
+                    user = allUsers.get(name);
+                    System.out.println("👋 Welcome back, " + name + "!");
+                } else {
+                    user = new QuizGiver(name);
+                    allUsers.put(name, user);
+                    System.out.println("👋 Hello, " + name + "! New user created.");
+                }
+
+                Quiz selectedQuiz = chooseGenre();
+                runQuiz(selectedQuiz, user);
+
+                // Clear any remaining input
+                scanner.nextLine();
+            } else if (input.equals("leaderboard")) {
+                showLeaderboard();
+            } else {
+                System.out.println("Invalid input. Please type 'exit' or 'play'.");
             }
         }
     }
@@ -109,5 +129,17 @@ public class QuizRush {
             scanner.nextLine();
             return -1;
         }
+    }
+
+    static void showLeaderboard() {
+        System.out.println("\n🏆 Leaderboard:");
+        if (allUsers.isEmpty()) {
+            System.out.println("No players yet!");
+            return;
+        }
+
+        allUsers.values().stream()
+                .sorted((a, b) -> b.score - a.score)
+                .forEach(user -> System.out.println(user.username + " - " + user.score + " points (Level " + user.level + ")"));
     }
 }
