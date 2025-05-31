@@ -25,7 +25,7 @@ class Quiz {
     public List<Question> getRandomQuestions() {
         List<Question> copy = new ArrayList<>(questions);
         Collections.shuffle(copy);
-        return copy.subList(0, Math.min(10, copy.size()));
+        return copy.subList(0, Math.min(5, copy.size()));
     }
 }
 
