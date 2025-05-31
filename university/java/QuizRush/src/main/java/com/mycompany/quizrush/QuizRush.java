@@ -16,14 +16,14 @@ public class QuizRush {
     static Map<String, QuizGiver> allUsers = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println("🎉 Welcome to QuizRush!");
+        System.out.println("Welcome to QuizRush!");
 
         while (true) {
             System.out.print("\nType 'exit' to quit, 'play' to play, or 'leaderboard' to view scores: ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("exit")) {
-                System.out.println("👋 Thanks for playing!");
+                System.out.println("\nThanks for playing!");
                 break;
             } else if (input.equals("play")) {
                 System.out.print("Enter your username: ");
@@ -32,27 +32,25 @@ public class QuizRush {
                 QuizGiver user;
                 if (allUsers.containsKey(name)) {
                     user = allUsers.get(name);
-                    System.out.println("👋 Welcome back, " + name + "!");
+                    System.out.println("\nWelcome back, " + name + "!");
                 } else {
                     user = new QuizGiver(name);
                     allUsers.put(name, user);
-                    System.out.println("👋 Hello, " + name + "! New user created.");
+                    System.out.println("\nHello, " + name + "! (New user).");
                 }
 
                 Quiz selectedQuiz = chooseGenre();
                 runQuiz(selectedQuiz, user);
 
-                // Clear any remaining input
                 scanner.nextLine();
             } else if (input.equals("leaderboard")) {
                 showLeaderboard();
             } else {
-                System.out.println("Invalid input. Please type 'exit' or 'play'.");
+                System.out.println("Invalid input. Please try again.");
             }
         }
     }
 
-    // Step 1: Genre Selection
     static Quiz chooseGenre() {
         System.out.println("Choose a genre:");
         System.out.println("1. Movie");
@@ -62,7 +60,7 @@ public class QuizRush {
         System.out.println("5. History");
 
         int choice = scanner.nextInt();
-        scanner.nextLine(); // Clear newline
+        scanner.nextLine();
 
         switch (choice) {
             case 1:
@@ -81,10 +79,9 @@ public class QuizRush {
         }
     }
 
-    // Step 2: Run the Quiz Loop
     static void runQuiz(Quiz quiz, QuizGiver user) {
-        System.out.println("🎮 Genre: " + quiz.genre);
-        List<Question> quizQuestions = quiz.getRandomQuestions(); // Pick 5
+        System.out.println("\nSelected Genre: " + quiz.genre);
+        List<Question> quizQuestions = quiz.getRandomQuestions();
 
         int correctAnswers = 0;
 
@@ -98,30 +95,28 @@ public class QuizRush {
             long duration = (System.currentTimeMillis() - startTime) / 1000;
 
             if (duration > 10) {
-                System.out.println("⏰ Time's up! No point awarded.");
+                System.out.println("\nYou took more than 10 seconds! No point awarded.");
                 continue;
             }
 
             if (q.isCorrect(answer - 1)) {
-                System.out.println("✅ Correct!");
+                System.out.println("\nCORRECT ANSWER!");
                 correctAnswers++;
             } else {
-                System.out.println("❌ Incorrect.");
+                System.out.println("\nINCORRECT ANSWER!");
             }
         }
 
         int earnedPoints = correctAnswers * 5;
         user.updateScore(earnedPoints);
-        System.out.println("\n🏁 Quiz Over! You scored: " + correctAnswers + "/5");
-        System.out.println("⭐ Points Earned: " + earnedPoints);
+        System.out.println("\nQuiz Over! You scored: " + correctAnswers + "/5");
+        System.out.println("Points Earned: " + earnedPoints);
         user.viewScore();
         user.showLevel();
     }
 
-    // Input with basic time check (not enforced during blocking input)
     static int getAnswerWithTimeout(int seconds) {
-        // WARNING: Java console doesn't natively support strict timeout without threads.
-        // This is a simulated version. For strict timing, use threads.
+
         System.out.print("Enter option (1-4): ");
         try {
             return scanner.nextInt();
@@ -132,14 +127,23 @@ public class QuizRush {
     }
 
     static void showLeaderboard() {
-        System.out.println("\n🏆 Leaderboard:");
+        System.out.println("\nLeaderboard:");
         if (allUsers.isEmpty()) {
             System.out.println("No players yet!");
             return;
         }
 
-        allUsers.values().stream()
-                .sorted((a, b) -> b.score - a.score)
-                .forEach(user -> System.out.println(user.username + " - " + user.score + " points (Level " + user.level + ")"));
+        List<QuizGiver> users = new ArrayList<>(allUsers.values());
+
+        Collections.sort(users, new Comparator<QuizGiver>() {
+            public int compare(QuizGiver a, QuizGiver b) {
+                return b.score - a.score;
+            }
+        });
+
+        for (QuizGiver user : users) {
+            System.out.println(user.username + " - " + user.score + " points (Level " + user.level + ")");
+        }
     }
+
 }
