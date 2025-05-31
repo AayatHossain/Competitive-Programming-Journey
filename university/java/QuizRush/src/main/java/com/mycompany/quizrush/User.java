@@ -18,6 +18,6 @@ class User {
     }
 
     public void viewScore() {
-        System.out.println(username + "'s Score: " + score);
+        System.out.println(username + "'s total points: " + score);
     }
 }

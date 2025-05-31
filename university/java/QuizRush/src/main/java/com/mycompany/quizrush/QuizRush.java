@@ -19,7 +19,7 @@ public class QuizRush {
         System.out.println("Welcome to QuizRush!");
 
         while (true) {
-            System.out.print("\nType 'exit' to quit, 'play' to play, or 'leaderboard' to view scores: ");
+            System.out.print("\nType 'play' to continue,'exit' to quit or 'leaderboard' to view scores: ");
             String input = scanner.nextLine().trim().toLowerCase();
 
             if (input.equals("exit")) {

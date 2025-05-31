@@ -29,6 +29,6 @@ class QuizGiver extends User {
     }
 
     public void showLevel() {
-        System.out.println("Level: " + level);
+        System.out.println(username + "'s current level: " + level);
     }
 }
