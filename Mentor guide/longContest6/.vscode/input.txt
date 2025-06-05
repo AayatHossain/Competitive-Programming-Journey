@@ -1,2 +1,4 @@
-qqqaaabbbcccfffrrr
-qabcfr
+3 3
+GWW
+WWW
+WWG
