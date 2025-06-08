@@ -10,11 +10,8 @@ int f(int w, int i, int j, int face, int n, int m){
    
     if(invalid)return LLONG_MAX/2;
 
-    
-    if(dp[i][j][face] != -1) return dp[i][j][face];
-
     if(a[i][j]=='W'){
-        a[i][j] = 'G';
+  
         w--;
         // cout<<w<<" "<<i<<" "<<j<<endl;
     }
@@ -28,21 +25,12 @@ int f(int w, int i, int j, int face, int n, int m){
     if(face==1){
         v1 = f(w,i,j+1,1,n,m)+1;
         v2 = f(w,i+1,j,0,n,m)+1;
-        
-
-        dp[i][j][face] = min(v1,v2);
-
-        if(i==0 && j==4){
-        cout<<v1<<" "<<v2<<endl;
-        cout<<dp[i][j][face]<<endl;
-
-        }
-        return dp[i][j][face];
+    
+        return min(v1,v2);
     }else{
         v1 = f(w,i,j-1,0,n,m)+1;
         v2 = f(w,i+1,j,1,n,m)+1;
-        
-        return dp[i][j][face] = min(v1,v2);
+        return min(v1,v2);
     }
 }
 
