@@ -1,2 +1,7 @@
-1
-PASTA
+6
+abcd
+aaaa
+abc
+aab
+abababaabababa
+pqrsabcdpqrs
