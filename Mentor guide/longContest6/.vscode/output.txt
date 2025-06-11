@@ -1,2 +1,28 @@
-Case 1: 63
-Case 2: 5
+Case 1: A
+T
+T
+S
+T
+T
+S
+S
+A
+S
+T
+S
+S
+A
+S
+S
+A
+A
+P
+A
+S
+A
+T
+S
+S
+A
+S
+27
