@@ -47,9 +47,34 @@ public class Example1 {
         }
         //custom exception with inheritance
         try{
-            int res = multiply(5,10);
+            int res = multiply(50,10);
             System.out.println(res);
         }catch(CustomException e){
+            System.out.println(e.getMessage());
+        }
+        
+        
+        
+        
+        //throwing inside the trycatch block
+//        Example-1
+        try{
+            int a = 5, b = 10;
+            if(a==5){
+                throw new CustomException("CustomException-2 occured");
+            }
+            System.out.println(a-b);
+        }catch(CustomException e){
+            System.out.println(e.getMessage());
+        }
+        //Example-2
+        try{
+            int a = 5;
+            if(a==5){
+                throw new ArithmeticException("ArithmeticException occured");
+            }
+            System.out.println(a*a);
+        }catch(ArithmeticException e){
             System.out.println(e.getMessage());
         }
     }
