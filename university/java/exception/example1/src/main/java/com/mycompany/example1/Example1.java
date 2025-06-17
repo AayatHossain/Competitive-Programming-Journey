@@ -47,7 +47,7 @@ public class Example1 {
         }
         //custom exception with inheritance
         try{
-            int res = multiply(50,10);
+            int res = multiply(5,10);
             System.out.println(res);
         }catch(CustomException e){
             System.out.println(e.getMessage());
@@ -76,6 +76,8 @@ public class Example1 {
             System.out.println(a*a);
         }catch(ArithmeticException e){
             System.out.println(e.getMessage());
+        }finally{
+            System.out.println("hihihihi");
         }
     }
 }
