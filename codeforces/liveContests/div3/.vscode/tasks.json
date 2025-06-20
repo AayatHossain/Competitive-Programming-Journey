@@ -1,0 +1,21 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile & Run with I/O",
+            "type": "shell",
+            "command": "g++ \"${file}\" -o \"${fileDirname}\\${fileBasenameNoExtension}.exe\" && \"${fileDirname}\\${fileBasenameNoExtension}.exe\" < \"${fileDirname}\\input.txt\" > \"${fileDirname}\\output.txt\"",
+            "group": {
+                "kind": "build",
+                "isDefault": true  // ⭐ Makes this the default task
+            },
+            "problemMatcher": ["$gcc"],
+            "options": {
+                "shell": {
+                    "executable": "cmd.exe",
+                    "args": ["/C"]
+                }
+            }
+        }
+    ]
+}
