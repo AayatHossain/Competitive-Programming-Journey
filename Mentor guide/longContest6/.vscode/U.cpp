@@ -2,26 +2,28 @@
 using namespace std;
 #define int long long
 const int mod = 1e9+7;
-
-
-
+const int N = 1e5;
+int dp[N][10];
+int n,m;
+int f(int i, int j, string &s, string &t){
+    if(j==m){return 1;}
+    if(i==n){return 0;}
+    if(dp[i][j] != -1){return dp[i][j];}
+    if(s[i]==t[j]){
+        return dp[i][j] = (f(i+1, j+1, s, t)%mod + f(i+1, j, s, t)%mod)%mod;
+    }else{
+        return dp[i][j] = f(i+1, j, s, t)%mod;
+    }
+}
+ 
+ 
 signed main(){
     string s,t;cin>>s>>t;
-    int n = s.size();
-        int m = t.size();
-        int dp[m+1][n+1] = {};
-        for(int j = 0; j <= n; j++) {
-            dp[0][j] = 1;
-        }
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                dp[i + 1][j + 1] = dp[i + 1][j];
-                if (t[i] == s[j]) {
-                    dp[i + 1][j + 1] += dp[i][j];
-                }
-                dp[i+1][j+1] = dp[i+1][j+1]%mod;
-            }
-        }
-        cout<<dp[m][n]%mod<<endl;
+     n = s.size();
+     m = t.size();
+    memset(dp, -1, sizeof dp);
+    int ans = f(0,0,s,t);
+    cout<<ans<<endl;
+        
     return 0;
 }
