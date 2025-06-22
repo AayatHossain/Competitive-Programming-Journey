@@ -1,22 +1,30 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int n;
-double a[3000];
-double f(int i, int h, int t, double total){
-    if(i==n && h > t){
-        return total;
+signed main()
+{
+    int n;
+    cin >> n;
+    double a[n+1];
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
     }
-    if(i==n && h <= t){
-        return 0;
+    double dp[n+1][n+1] = {};
+    dp[0][0] = 1;
+    for(int i = 1; i <= n; i++ ){
+        for(int j = 0; j <= i; j++){
+            if(j==0){
+                dp[i][j] = dp[i-1][j]*(1-a[i]);
+            }else{
+                dp[i][j] = dp[i-1][j]*(1-a[i]) + dp[i-1][j-1]*a[i];
+            }
+        }
     }
-    return f(i+1,h+1,t,total*a[i])+f(i+1,h,t+1,total*(1-a[i]));
-}
-signed main(){
-   cin>>n;
-   for(int i = 0; i < n; i++){
-    cin>>a[i];
-   }
-   cout<<fixed<<setprecision(9)<<f(0,0,0,1)<<endl;
+    double ans = 0;
+    for(int i = (n+1)/2; i<=n; i++){
+        ans += dp[n][i];
+    }
+    cout << fixed << setprecision(10) << ans << endl;
 
     return 0;
 }
