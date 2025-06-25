@@ -10,6 +10,7 @@ signed main(){
         int yf = y1+b;
         int horizontal = x2 - xf;
         int vertical = abs(y2 - yf);
+        if(y1==y2)
         int flag = 0;
         if(horizontal%a==0 || vertical%b==0){
             flag = 1;
