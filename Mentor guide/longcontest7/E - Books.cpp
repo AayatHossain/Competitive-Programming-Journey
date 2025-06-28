@@ -37,6 +37,7 @@ signed main()
         }
     }
     if (ans == LLONG_MIN / 2)
+
     {
         cout << 0 << endl;
     }
