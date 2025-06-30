@@ -1,25 +1,51 @@
 #include<bits/stdc++.h>
-using namesapce std;
-class Solution {
-    int f(int curr, vector<int>& nums, int target, int i, int n, vector<vector<int>> &dp){
-        if(curr==target){
-            return 1;
+using namespace std;
+bool f(vector<int> &a, int c1){
+    int i = 0, j = a.size() - 1;
+    while(i < j){
+        if(a[i]==c1){
+            i++;continue;
         }
-        if(i==n){
-            return 0;
+        if(a[j]==c1){
+            j--;continue;
         }
-        if(dp[target-curr][i] != -1){
-            return dp[target-curr][i];
+        if(a[i]==a[j]){
+            i++; j--;
+        }else{
+            return false;
         }
-        int count = 0;
-        for(int k = i; k < n; k++){
-            count += f(curr+nums[k], nums, target, k, n, dp);
-        }
-        return dp[target-curr][i] = count;
     }
-public:
-    int combinationSum4(vector<int>& nums, int target) {
-        vector<vector<int>> dp(target+1, vector<int>(nums.size(), -1));
-        return f(0, nums, target, 0, nums.size() - 1, dp);
+    return true;
+}
+signed main(){
+    int t;cin>>t;
+    while(t--){
+        int n; cin>>n;
+        vector<int> a(n);
+        for(int i = 0; i < n; i++){
+            cin>>a[i];
+        }
+        int i = 0, j = n - 1;
+        bool flag = true;
+        while(i < j){
+            if(a[i]==a[j]){
+                i++;j--;
+            }else{
+                int c1 = a[i];
+                int c2 = a[j];
+                bool v1 = f(a, c1);
+                bool v2 = f(a, c2);
+                if(!v1 && !v2){
+                    flag = 0;
+                }
+                break;
+            }
+        }
+        if(flag){
+            cout<<"YES"<<endl;
+        }else{
+            cout<<"NO"<<endl;
+        }
     }
-};
+    return 0;
+}

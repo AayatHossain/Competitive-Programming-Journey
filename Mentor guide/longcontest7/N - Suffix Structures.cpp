@@ -4,6 +4,7 @@ signed main()
 {
     string s;
     string t;
+    cin>>s>>t;
     int n = s.size();
     int m = t.size();
     if (n == m)
@@ -23,7 +24,7 @@ signed main()
     {
         int f1 = 0;
         int i = 0;
-        int j = m - 1;
+        int j = 0;
         while (i < n && j < m)
         {
             if (s[i] == t[j])
@@ -40,6 +41,7 @@ signed main()
         {
             f1 = 1;
         }
+       
         if (f1)
         {
             cout << "automaton" << endl;
@@ -50,7 +52,7 @@ signed main()
             sort(s.begin(), s.end());
             sort(t.begin(), t.end());
             int i = 0;
-            int j = m - 1;
+            int j = 0;
             while (i < n && j < m)
             {
                 if (s[i] == t[j])
@@ -65,11 +67,14 @@ signed main()
             }
             if (j == m)
             {
-                f2 = 0;
+                f2 = 1;
             }
             if (f2)
             {
                 cout << "both" << endl;
+            }else{
+                cout << "need tree" << endl;
+
             }
         }
     }
