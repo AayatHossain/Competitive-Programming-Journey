@@ -1,1 +1,6 @@
-YES
+Bob
+Alice
+Alice
+Bob
+Bob
+Alice
