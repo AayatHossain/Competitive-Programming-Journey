@@ -30,9 +30,9 @@ signed main(){
                 s.push_back(abs(a[i]));
             }
         }
-        for(auto x: s){
-            cout<<x<<" ";
-        }
+        // for(auto x: s){
+        //     cout<<x<<" ";
+        // }
         cout<<endl;
         
             int i = 0;
