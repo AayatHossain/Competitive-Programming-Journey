@@ -35,7 +35,7 @@ signed main()
             for (int x : ans)
             {
                 cout << x << " ";
-            }
+            }   
             cout << endl;
         }
         else
