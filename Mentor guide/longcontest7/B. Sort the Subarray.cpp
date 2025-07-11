@@ -10,44 +10,45 @@ signed main(){
         for(int i = 0; i < n; i++){
             cin>>b[i];
         }
-        vector<int> pa(n);
-        vector<int> pb(n);
-        pa[0] = a[0];
-        pb[0] = b[0];
-        for(int i = 1; i < n; i++){
-            pa[i] = pa[i-1]+a[i];
-            pb[i] = pb[i-1]+b[i];
+        int cl = 0, cr = 0;
+        int i = 0, j = n -1;
+        while(i < n && a[i] == b[i]){
+            i++;
+            cl++;
         }
-        // int j = 0;
-        int l = -1, r = -1;
-        // int f = 0;
-        pair<int, int> p={0,0};
-        for(int i = 0; i < n-1; i++){
-        
-            l = i;
-            while(i+1 < n && b[i] <= b[i+1]){
-                i++;
-                
-                int beforeA,beforeB;
-                if(l-1 < 0){
-                    beforeA = 0;
-                    beforeB = 0;
-                }else{
-                    beforeA = pa[l-1];
-                    beforeB = pb[l-1]; 
-                }
-                int sa = pa[i] - beforeA;
-                int sb = pb[i] - beforeB;
-                // cout<<sa<<" "<<sb<<endl;
-                if(sa==sb){
-                   if(p.second - p.first + 1 < i - l + 1){
-                        p.first = l; p.second = i;
-                   } 
-                }  
+        while(j>=0 && a[j]==b[j]){
+            j--;
+            cr++;
+        }
+        int l = i + 1;
+        int r = j +1;
+        // cout<<l<<" "<<r<<endl;
+        int mx = b[j];
+        int mn = b[i];
+        // cout<<mn<<" "<<mx<<endl;
+
+        while(i > 0){
+            int mn2 = a[i-1];
+            if(mn2<=b[i]){
+                i--;
+                mn = mn2;
+            }else{
+                break;
             }
-            // i--;
         }
-        cout<<p.first+1<<" "<<p.second+1<<endl;
+        while(j < n-1){
+            int mx2 = a[j+1];
+            if(mx2 >= b[j]){
+                j++;
+                mx = mx2;
+            }else{
+                break;
+            }
+        }
+        cout<<i+1<<" "<<j+1<<endl;
+        
+
+
     }
     return 0;
 }

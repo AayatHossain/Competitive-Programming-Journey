@@ -25,8 +25,16 @@ signed main()
     }
     else
     {
+        int d = n%6;
+        bool v1 = false,v2 = false;
+        if(d==4 || d==5 || d == 0){
+            v1 = true;
+        }
+        if(d==1 || d == 2 || d == 3){
+            v2 = true;
+        }
        
-        if ((n / 3) & 1)
+        if (v2)
         {
             if (n % 3 == 1)
             {
@@ -60,5 +68,6 @@ signed main()
         
     }
     cout << ((ans % mod) + mod) % mod << endl;
+    // cout<<ans<<endl;
     return 0;
 }
