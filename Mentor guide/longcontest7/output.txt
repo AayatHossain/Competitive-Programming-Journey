@@ -1,2 +1,6 @@
-10012
-9
+YES
+NO
+YES
+NO
+NO
+YES
