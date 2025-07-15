@@ -1,34 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
-int f(int &s, int cs, int i, int n, vector<vector<int>> &dp, vector<int> &arr)
-{
-    if (cs == s - cs)
-    {
-        // cout<<i<<" "<<cs<<endl;
-        return 1;
-    }
-    if (cs > s - cs || cs == s || i >= n)return 0;
-    // cout<<cs<<" "<<s<<endl;
 
-    if (dp[cs][i] != -1)
-        return dp[cs][i];
-    int v1 = f(s, cs + arr[i], i + 1, n, dp, arr);
-    int v2 = f(s, cs, i + 1, n, dp, arr);
-    return dp[cs][i] = (v1 | v2);
-}
 
 bool equalPartition(vector<int> &arr)
 {
     int n = arr.size();
-    int sum = 0;
-    for (int i = 0; i < n; i++)
-    {
-        sum += arr[i];
-    }
-    vector<vector<int>> dp(sum + 1, vector<int>(n, -1));
-    int ans = f(sum, 0, 0, n, dp, arr);
-    // cout<<ans<<endl;
-    return ans;
+        int sum = 0;
+        for(int i = 0; i < n; i++){
+            sum += arr[i];
+        }
+        if(sum&1)return false;
+        sum/=2;
+        vector<vector<int>> dp(n+1, vector<int>(sum+1, 0));
+        dp[0][0] = 1;
+        for(int i = 0; i <= n; i++){
+            dp[i][0] = 1;
+        }
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= sum; j++){
+                int v1 = dp[i-1][j];
+                int v2 = 0;
+                if(j - arr[i-1] >= 0){
+                    v2 = dp[i-1][j-arr[i-1]];
+                }
+                dp[i][j] = v1 | v2;
+            }
+        }
+        
+        return dp[n][sum];
 }
 signed main()
 {
