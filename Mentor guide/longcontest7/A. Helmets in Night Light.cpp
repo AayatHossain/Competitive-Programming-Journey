@@ -11,7 +11,7 @@ signed main()
         cin >> n >> p;
         vector<int> a(n);
         vector<int> b(n);
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)sadas
         {
             cin >> a[i];
         }
@@ -44,7 +44,7 @@ signed main()
                 {
                     cost += left * q;
                     left = 0;
-                    break;
+                    
                    
                 }
                 else
