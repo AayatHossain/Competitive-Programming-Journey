@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define int long long
 
 int f(int i, int k, vector<vector<int>> &dp, vector<int> & c, int n){
     if(i>=n || k == 0)return 0;
@@ -13,6 +14,7 @@ signed main()
 {
     int t;
     cin >> t;
+    int z = 1;
     while (t--)
     {
         string s; getline(cin, s);
@@ -45,7 +47,9 @@ signed main()
         //     cout << x << " ";
         // }
         vector<vector<int>> dp(n, vector<int>(k+1,-1));
-        cout<<f(0, k, dp, c, n)<<endl;
+        int ans = f(0, k, dp, c, n);
+        cout<<"Case "<<z<<":"<<" "<<ans<<endl;
+        z++;
     }
     return 0;
 }
