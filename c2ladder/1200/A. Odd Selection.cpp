@@ -23,70 +23,9 @@ signed main()
                 even++;
             }
         }
-        int f = 1;
-        if (x & 1)
-        {
-            if (odd == 0)
-            {
-                f = 0;
-            }
-            else
-            {
-                int c = 0;
-                c++;
-                odd--;
-                c += even;
-                if (c < x)
-                {
-                    int on = x - c;
-                    if (on <= odd && on % 2 == 0)
-                    {
-                        f = 1;
-                    }
-                    else
-                    {
-                        f = 0;
-                    }
-                }
-                else
-                {
-                    f = 1;
-                }
-            }
-        }
-        else
-        {
-            if (even == 0 || odd == 0)
-            {
-                f = 0;
-            }
-            else
-            {
-                int c = 0;
-                c++;
-                odd--;
-                c++;
-                even--;
-                c += even;
-                if (c < x)
-                {
-                    int on = x - c;
-                    if (on <= odd && on % 2 == 0)
-                    {
-                        f = 1;
-                    }
-                    else
-                    {
-                        f = 0;
-                    }
-                }
-                else
-                {
-                    f = 1;
-                }
-            }
-        }
-        if(f){
+        // cout<<odd<<" "<<even<<endl;
+        // int f = 1;
+        if(odd <= x && odd != 0){
             cout<<"YES"<<endl;
         }else{
             cout<<"NO"<<endl;
