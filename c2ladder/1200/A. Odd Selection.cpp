@@ -25,7 +25,7 @@ signed main()
         }
         // cout<<odd<<" "<<even<<endl;
         // int f = 1;
-        if(odd <= x && odd != 0){
+        if(){
             cout<<"YES"<<endl;
         }else{
             cout<<"NO"<<endl;
