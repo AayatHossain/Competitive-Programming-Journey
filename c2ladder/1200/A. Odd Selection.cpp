@@ -23,13 +23,14 @@ signed main()
                 even++;
             }
         }
-        // cout<<odd<<" "<<even<<endl;
-        // int f = 1;
-        if(){
-            cout<<"YES"<<endl;
-        }else{
-            cout<<"NO"<<endl;
+        int ans = 0;
+        for(int i= 1; i <= odd; i++){
+            if(i&1){
+                if(even >= x - i)ans = 1;
+            }
         }
+        if(ans)cout<<"YES"<<endl;
+        else{cout<<"NO"<<endl;}
     }
     return 0;
 }
