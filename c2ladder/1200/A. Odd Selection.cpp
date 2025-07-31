@@ -24,8 +24,8 @@ signed main()
             }
         }
         int ans = 0;
-        for(int i= 1; i <= odd; i++){
-            if(i&1){
+        for(int i= 1; i <= odd; i++){ 
+            if(i&1 && i <= x){
                 if(even >= x - i)ans = 1;
             }
         }
