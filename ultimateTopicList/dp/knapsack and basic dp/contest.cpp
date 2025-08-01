@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
+// #define int long long
 void print(vector<int> &a)
 {
     for (int i = 0; i < a.size(); i++)
@@ -39,9 +39,9 @@ void print(map<int, int> &a)
 }
 signed main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+    // ios::sync_with_stdio(false);
+    // cin.tie(nullptr);
+    // cout.tie(nullptr);
 
     int t;
     cin >> t;
@@ -50,11 +50,26 @@ signed main()
         int n;
         cin >> n;
         vector<int> a(n);
+        map<int,int> m;
+        int z=0,o=0;
         for (int i = 0; i < n; i++)
         {
             cin >> a[i];
+            if(a[i]==0)z++;
+            if(a[i]==1)o++;
+            m[a[i]]++;
             
         }
+        int p = min(z,o);
+        int ans = p*2;
+        m[0] -= p;
+        m[1] -= p;
+        for(auto x: m){
+            if(x.first==0 && x.second > 0){ans+=x.second; continue;}
+            ans += x.second*x.first;
+        }
+        cout<<ans<<endl;
+
     }
     return 0;
 }
