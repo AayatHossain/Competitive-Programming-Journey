@@ -2,6 +2,7 @@
 using namespace std;
 #define int long long 
 signed main(){
+    
     int n ; cin>>n;
     vector<int> dp(n+1,LLONG_MAX);
     dp[0] = 0;
