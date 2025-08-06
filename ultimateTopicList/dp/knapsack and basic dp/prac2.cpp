@@ -75,9 +75,9 @@ signed main()
     cin >> t;
     while (t--)
     {
-        for (int i = 1e8; i <= 1e8; i++)
+        for (int i = 6; i <= 100; i++)
         {
-            for (int j = i; j <= 1e8+200; j++)
+            for (int j = i; j <= 200; j++)
             {
                 int ans3 = f1(i, j);
                 int ans4 = f2(i, j);
@@ -86,6 +86,8 @@ signed main()
                     cout << "Wrong" << " " << i << " " << j << endl;
                     cout<<ans3<<" "<<ans4<<endl;
                     break;
+                }else{
+                    cout<<i<<" "<<j<<endl;
                 }
             }
         }
