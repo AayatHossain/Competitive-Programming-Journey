@@ -8,6 +8,7 @@ int f(int n, int w){
     for(int i = 1; i <= m; i++){
         v1+=f(n-i,1);
         v1+=f(n-i,2);
+
     }
     return v1;
 }
