@@ -1,28 +1,30 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int m;
-int f(int n, int w){
-    if(n==0)return 1;
-    if(n<0 || w < 0)return 0;
-    int v1 = 0, v2 = 0;
-    for(int i = 1; i <= m; i++){
-        v1+=f(n-i,1);
-        v1+=f(n-i,2);
+#define int long long
+const int mod = 1e9 + 7;
+const int N = 1e6+1;
+signed main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 
+    vector<vector<int>> dp(N + 1, vector<int>(3));
+    dp[1][1] = 1;
+    dp[1][2] = 1;
+    for (int i = 2; i <= N; i++)
+    {
+        dp[i][1] = (((4 * (dp[i - 1][1] % mod)) % mod) + dp[i - 1][2] % mod) % mod;
+        dp[i][2] = (((2 * (dp[i - 1][2] % mod)) % mod) + dp[i - 1][1] % mod) % mod;
     }
-    return v1;
-}
-signed main(){
-    int t;cin>>t;
-    while(t--){
-        int n; cin>>n;
-        m=n;
-        int ans = 0;
-        for(int i = 1; i <= n; i++){
-            cout<<f(i,2)<<endl;
-            ans+=f(i,2);
-        }
-        cout<<ans<<endl;
+
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        cout << (dp[n][1] % mod + dp[n][2] % mod) % mod << '\n';
     }
     return 0;
 }
