@@ -1,30 +1,36 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define int long long
 const int mod = 1e9+7;
-int f(int i,int prod, vector<int> &a,vector<vector<int>> &dp){
-    if(i==a.size()){
-        if(prod%2520==0){
-            return 1;
-        }else{
-            return 0;
+
+signed main(){
+    int n; 
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+        a[i] %= 2520; // only need mod 2520
+    }
+
+    // dp[i][prod] = number of ways using first i elements (0..i-1) to get product = prod
+    vector<vector<int>> dp(n+1, vector<int>(2520, 0));
+
+    // Base case: before choosing anything, product = 1 (multiplicative identity)
+    dp[0][1] = 1;
+
+    // Forward iteration
+    for(int i = 0; i < n; i++){
+        for(int prod = 0; prod < 2520; prod++){
+            // Option 1: skip a[i]
+            dp[i+1][prod] = (dp[i+1][prod] + dp[i][prod]) % mod;
+
+            // Option 2: take a[i]
+            int newProd = (prod * a[i]) % 2520;
+            dp[i+1][newProd] = (dp[i+1][newProd] + dp[i][prod]) % mod;
         }
     }
-    if(dp[i][prod]!=-1)return dp[i][prod];
-    int v1 = f(i+1, (prod*a[i])%2520,a,dp)%mod;
-    int v2 = f(i+1, prod%2520,a,dp)%mod;
-    return dp[i][prod]=(v1 + v2)%mod;
-}
-signed main(){
-    int n; cin>>n;
-    vector<int> a(n);
-    int p = 1;
-    for(int i = 0; i < n; i++){
-        cin>>a[i];
-        a[i] %= 2520;
-    }
-    vector<vector<int>> dp(n,vector<int>(2521,-1));
-    int ans = f(0,1,a,dp);
-    cout<<ans%mod<<endl;
+
+    int ans = dp[n][0]; // final product divisible by 2520
+    cout << ans % mod << endl;
     return 0;
 }

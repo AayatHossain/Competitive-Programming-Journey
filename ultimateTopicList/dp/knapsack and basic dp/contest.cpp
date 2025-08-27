@@ -47,26 +47,21 @@ signed main()
     cin >> t;
     while (t--)
     {
-        int n;
-        cin >> n;
-        vector<int> a(n);
-        map<int,int> m;
-        int z=0,o=0;
-        for (int i = 0; i < n; i++)
-        {
-            cin >> a[i];
-            if(a[i]==0)z++;
-            if(a[i]==1)o++;
-            m[a[i]]++;
-            
-        }
-        int p = min(z,o);
-        int ans = p*2;
-        m[0] -= p;
-        m[1] -= p;
-        for(auto x: m){
-            if(x.first==0 && x.second > 0){ans+=x.second; continue;}
-            ans += x.second*x.first;
+        int n,m;
+        string a,b;
+        cin>>n;
+        cin>>a;
+        cin>>m;
+        cin>>b;
+        string ans = a;
+        for(int i = 0; i < m; i++){
+            char x; cin>>x;
+            if(x=='D'){
+                ans+=b[i];
+            }else{
+                char ch = b[i];
+                ans = ch + ans;
+            }
         }
         cout<<ans<<endl;
 
