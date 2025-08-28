@@ -1,67 +1,37 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define int long long
-const int mod = 1e9 + 7;
-const int N = 1e5 + 1;
-int n, m;
-int a[N];
-int dp[N][101];
-int f(int prev, int i)
-{
-    if ((prev <= 0 || prev > m) && prev != -1)
-        return 0;
-    if (i > n)
-        return 1;
-    if (dp[i][prev] != -1)
-        return dp[i][prev];
-    if (a[i] != 0)
-    {
-        if (abs(a[i] - prev) <= 1)
-        {
-            return dp[i][prev] = f(a[i], i + 1) % mod;
-        }
-        else
-        {
-            return 0;
+const int mod = 1e9+7;
+signed main(){
+    int n, m; cin>>n>>m;
+    vector<int> a(n);
+    for(int i = 0 ; i < n; i++)cin>>a[i];
+    vector<vector<int>> dp(n, vector<int>(101,0));
+    if(a[0]!=0){
+        dp[0][a[0]]=1;
+    }else{
+        for(int i = 1; i <= m; i++){
+            dp[0][i]=1;
         }
     }
-    else
-    {
-        int v = 0;
-        if (prev == -1)
-        {
-            for (int j = 1; j <= m; j++)
-            {
-
-                v = (v%mod + f(j, i + 1)%mod)%mod;
+    for(int i = 1; i < n; i++){
+        if(a[i] != 0){
+            dp[i][a[i]]= (((dp[i-1][a[i]]%mod+dp[i-1][a[i]-1]%mod)%mod)+dp[i-1][a[i]+1])%mod;
+        }else{
+            for(int j = 1; j <= m; j++){
+                dp[i][j] = (((dp[i-1][j]%mod+dp[i-1][j-1]%mod)%mod)+dp[i-1][j+1])%mod;
             }
         }
-        else
-        {
-            int v1 = f(prev+1, i+1)%mod;
-            int v2 = f(prev, i+1)%mod;
-            int v3 = f(prev-1, i+1)%mod;
-            v = ((v1+v2)%mod + v3)%mod;
-        }
-        return dp[i][prev] = v;
-    }
-}
-signed main()
-{
-    cin >> n >> m;
-    memset(dp, -1, sizeof dp);
-    for (int i = 1; i <= n; i++)
-    {
-        cin >> a[i];
     }
     int ans = 0;
-    int prev;
-    if(a[1]==0){
-        prev = -1;
+    if(a[n-1]==0){
+        for(int i = 1; i <= m; i++){
+            ans = (ans%mod + dp[n-1][i]%mod)%mod;
+        }
     }else{
-        prev = a[1];
+        ans = dp[n-1][a[n-1]]%mod;
     }
-    ans = f(prev, 1)%mod;
-    cout << ans % mod << endl;
+    cout<<ans%mod<<endl;
+    
+ 
     return 0;
 }

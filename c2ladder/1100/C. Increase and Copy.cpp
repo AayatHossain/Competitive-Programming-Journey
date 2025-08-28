@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-int mx = 1e7;
+int mx = 1e5;
 signed main(){
     int t; cin>>t;
     while(t--){

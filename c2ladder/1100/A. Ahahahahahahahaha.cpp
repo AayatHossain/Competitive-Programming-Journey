@@ -23,6 +23,8 @@ signed main(){
         for(int i = 0; i <m-1; i++){
             if((b[i+1]-b[i] + 1)%2!=0){
                 a[b[i+1]-2]=-1;
+                b[i]=-2;
+                b[i+1]=-2;
                 i++;
             }else{
                 b[i]=-2;
