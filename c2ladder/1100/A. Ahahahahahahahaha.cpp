@@ -41,7 +41,7 @@ signed main(){
         //     cout<<x<<" ";
         // }
         // cout<<endl;
-
+C. Frog Jumps
         vector<int> c;
         for(int i = 0; i < n; i++){
             if(a[i]!=-1){
