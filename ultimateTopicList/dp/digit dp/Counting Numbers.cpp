@@ -6,7 +6,7 @@ string l,r;
 
 int f(int n, int p,int z, int t, string s){
     if(n == 0)return 1;
-    if(p != -1 && dp[n][p+1][z][t]!=-1)return dp[n][p+1][z][t];
+    if(dp[n][p+1][z][t]!=-1)return dp[n][p+1][z][t];
     int ub=9;
     if(t){
         ub = s[s.size() - n] - '0';
@@ -28,8 +28,11 @@ signed main(){
     r = to_string(n2);
 
     int right = f(r.size(),-1,1,1,r);
+
+    memset(dp, -1, sizeof dp);
     int left = f(l.size(),-1,1,1,l);
-    
+    // cout<<left<<endl;
+    // cout<<right<<endl;
     cout<<right - left<<endl;
 
 
