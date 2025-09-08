@@ -15,7 +15,7 @@ signed main(){
         }else{
             x = a-b; 
             int g=a-b;
-            cout<<a%g<<" "<<g-a%g<<endl;
+            // cout<<a%g<<" "<<g-a%g<<endl;
             y = min(a%g, g - a%g);
         }
         cout<<x<<" "<<y<<endl;

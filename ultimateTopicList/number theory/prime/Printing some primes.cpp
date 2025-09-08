@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int n = 1e8+1;
+const int n = 1e7+1;
 vector<bool> p(n,true);
 signed main(){
     for(int i = 2; i*i<=n;i++){
