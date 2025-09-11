@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int unsigned long long
+#define int long long
 void print(vector<int> &a)
 {
     for (int i = 0; i < a.size(); i++)
@@ -38,6 +38,12 @@ void print(map<int, int> &a)
     cout << endl;
 }
 
+struct node
+{
+    int l = -1;
+    int r = -1;
+};
+
 signed main()
 {
     ios::sync_with_stdio(false);
@@ -48,42 +54,21 @@ signed main()
     cin >> t;
     while (t--)
     {
-        int k, x;
-        cin >> k >> x;
-        vector<int> m;
-
-      
-        int fu = 1LL << k;
-
-        int u = x;
-        int v = fu*2 - x;
-
-        // int moves = f(u, v, x, m);
-        // cout<<u<<" "<<v<<endl;
-       
-        while(u != fu){
-            
-            
-            if(u<=fu){
-                m.push_back(1);
-                v-=u;
-                u*=2;
+        int a,b; cin>>a>>b;
+        int ans = -1;
+        if(b&1){
+            if(a&1){
+                ans = a*b+1;
             }
-            else{   
-                m.push_back(2);
-                u-=v;
-                v*=2;
-                
+        }else{
+            int k = b/2;
+            int s = a*k + b/k;
+            if(s%2==0){
+                ans = s;
             }
+        }
+        cout<<ans<<endl;
 
-        }
-        reverse(m.begin(),m.end());
-        cout << m.size() << endl;
-        for (auto l : m)
-        {
-            cout << l << " ";
-        }
-        cout << endl;
     }
     return 0;
 }

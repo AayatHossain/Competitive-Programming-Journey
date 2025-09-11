@@ -1,0 +1,16 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.QuickAid" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Remove scroll bars throughout the entire app -->
+        <item name="android:scrollbars">none</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarThumbVertical">@android:color/transparent</item>
+        <item name="android:scrollbarThumbHorizontal">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.QuickAid" parent="Base.Theme.QuickAid" />
+</resources>

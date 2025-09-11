@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QuickAid</string>
+    <string-array name="activity_levels">
+        <item>Sedentary (little or no exercise)</item>
+        <item>Light (exercise 1-3 days/week)</item>
+        <item>Moderate (exercise 3-5 days/week)</item>
+        <item>Active (exercise 6-7 days/week)</item>
+        <item>Very Active (hard exercise daily)</item>
+    </string-array>
+</resources>
