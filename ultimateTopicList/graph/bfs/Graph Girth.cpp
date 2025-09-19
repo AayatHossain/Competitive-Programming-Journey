@@ -21,15 +21,6 @@ void findCycle(int u, int parent) {
     }
 }
 
-// 6 7
-// 1 2
-// 2 3
-// 3 4
-// 4 5
-// 5 6
-// 5 3
-// 1 6
-
 signed main()
 {
     cin >> n >> m;

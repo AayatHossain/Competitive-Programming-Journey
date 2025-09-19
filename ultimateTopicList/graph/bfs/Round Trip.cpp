@@ -46,10 +46,6 @@ signed main(){
     for(int i = 1; i <= n; i++){
         if(!vis[i]){
 
-            // for(int j=1;j<=n;j++){
-            //     vis[j]=false;
-            //     p[j]=-1;
-            // }
             f = dfs(i);
             if(f){
                 break;
