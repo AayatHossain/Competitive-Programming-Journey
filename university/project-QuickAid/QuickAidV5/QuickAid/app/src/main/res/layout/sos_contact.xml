@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Emergency Contact Setup"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"
+        android:textColor="@android:color/black" />
+
+    <!-- Current Contact Display -->
+    <TextView
+        android:id="@+id/tvCurrentContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="No emergency contact set"
+        android:textColor="#263238"
+        android:textSize="16sp" />
+
+    <!-- Contact Name Input -->
+    <EditText
+        android:id="@+id/etContactName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contact Name"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:elevation="2dp" />
+
+    <!-- Phone Number Input -->
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        android:layout_marginBottom="16dp"
+        android:padding="12dp"
+        android:background="@android:color/white"
+        android:elevation="2dp" />
+
+    <!-- Buttons Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <!-- Pick from Contacts Button -->
+        <Button
+            android:id="@+id/btnPickContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pick Contact"
+            android:layout_marginEnd="8dp" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btnSaveContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:layout_marginStart="8dp" />
+
+    </LinearLayout>
+
+    <!-- Remove Contact Button -->
+    <Button
+        android:id="@+id/btnRemoveContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Remove Contact"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:visibility="gone" />
+
+    <!-- Instructions -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This contact will be notified in emergency situations"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="16dp"
+        android:gravity="center" />
+
+</LinearLayout>

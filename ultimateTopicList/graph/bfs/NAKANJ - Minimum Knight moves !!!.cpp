@@ -39,7 +39,7 @@ signed main(){
     while(t--){
         memset(v,0,sizeof v);
 
-        string s1,s2; cin>>s1>>s2;
+        string s1,s2; cin>>s1>>s2;C. Maze
         int si = abs('a' - s1[0]);
         int sj = abs('1' - s1[1]);
         int di = abs('a' - s2[0]);

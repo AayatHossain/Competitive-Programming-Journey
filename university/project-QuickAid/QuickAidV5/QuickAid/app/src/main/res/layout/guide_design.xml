@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/guidelineTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How to Use QuickAid"
+            android:textSize="24sp"
+            android:textColor="#2A65BB"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="20dp"
+            android:background="@drawable/rounded_corner"
+            android:elevation="4dp"
+            app:backgroundTint="#E3F2FD"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- App Logo -->
+        <ImageView
+            android:id="@+id/registerLogo"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="32dp"
+            android:contentDescription="App Logo"
+            android:src="@drawable/logo" />
+
+        <!-- Guidelines Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@android:color/white"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Welcome Message -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to QuickAid! 🚑"
+                    android:textSize="20sp"
+                    android:textColor="#2A65BB"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"
+                    android:lineSpacingMultiplier="1.2"/>
+
+                <!-- Guideline Items -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:divider="@drawable/divider"
+                    android:showDividers="middle">
+
+                    <!-- Guideline 1 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="1."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Always keep your profile information updated"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 2 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="2."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Use the Health Tracker to monitor your vitals daily"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 3 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="3."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Configure SOS settings for emergency quick actions"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 4 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="4."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Make emergency calls or share location when needed"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 5 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="5."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Locate nearby hospitals using the map feature"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 6 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="6."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Read all instructions carefully for proper use"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Guideline 7 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="8dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="7."
+                            android:textSize="16sp"
+                            android:textColor="#2A65BB"
+                            android:textStyle="bold"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Contact our help center for additional support"
+                            android:textSize="16sp"
+                            android:textColor="#333333"
+                            android:lineSpacingMultiplier="1.3"
+                            android:paddingStart="8dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Emergency Note -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚨 In case of emergency, shake your phone or press the SOS button!"
+            android:textSize="14sp"
+            android:textColor="#E53935"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="12dp"
+            android:background="@drawable/rounded_corner"
+            app:backgroundTint="#FFEBEE"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

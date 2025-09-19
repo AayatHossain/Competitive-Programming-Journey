@@ -38,8 +38,11 @@ void print(map<int, int> &a)
     cout << endl;
 }
 
-
-
+struct node
+{
+    int l = -1;
+    int r = -1;
+};
 
 signed main()
 {
@@ -51,30 +54,38 @@ signed main()
     cin >> t;
     while (t--)
     {
-        
-        int a, b;
-        cin>>a>>b;
-        int mx = LLONG_MIN;
-        if((a+b)%2 == 0){
-            mx = a+b;
-        }
-        if(b&1 && a&1){
-            cout<<a+b<<endl;
-        }else {
-            int nb = b;
-            int na = a;
-            while(nb>1){
-                int q = nb/2;
-                nb /=2;
-                na = na*q;
-                if((na+nb)%2 == 0){
-                    mx = max(mx, na+nb); 
-
-                }
+        int n; cin>>n;
+        vector<int> a(n);
+        vector<int> o,e;
+        for(int i = 0; i < n; i++){
+            cin>>a[i];
+            if(a[i]&1){
+                o.push_back(a[i]);
+            }else{
+                e.push_back(a[i]);
             }
         }
-        if(mx==LLONG_MIN)mx=-1;
-        cout<<mx<<endl;
+        sort(o.begin(),o.end());
+        sort(e.begin(),e.end());
+
+        int ans = 0;
+        if(o.size()==0){
+            ans = 0;
+        }else{
+            int i=0,j=o.size()-1;
+
+            for(auto x: e){
+                ans += x;
+            }
+            ans+=o[j];
+            j--;
+
+            while(i < j){
+                ans+= o[j];
+                i++;j--;
+            }
+        }
+        cout<<ans<<endl;
     }
     return 0;
 }
