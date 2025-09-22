@@ -1,55 +1,54 @@
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <algorithm>
+#include<bits/stdc++.h>
 using namespace std;
+int n;
+const int N =2e5+1;
+vector<int> g[N];
+vector<bool> vis(N,false);
+vector<int>before;
+vector<int>after;
+vector<int>beforeIndx(N+1);
 
-int main() {
-    int n;
-    cin >> n;
-    
-    vector<vector<int>> graph(n+1);
-    for (int i = 0; i < n-1; i++) {
-        int x, y;
-        cin >> x >> y;
-        graph[x].push_back(y);
-        graph[y].push_back(x);
-    }
-    
-    vector<int> seq(n);
-    for (int i = 0; i < n; i++) {
-        cin >> seq[i];
-    }
-    
-    vector<int> level(n+1, -1);
+bool cmp(int a, int b){
+    return beforeIndx[a] < beforeIndx[b];
+}
+
+void bfs(){
     queue<int> q;
     q.push(1);
-    level[1] = 0;
-    
-    while (!q.empty()) {
+    vis[1]=true;
+    while(!q.empty()){
         int u = q.front();
         q.pop();
-        for (int v : graph[u]) {
-            if (level[v] == -1) {
-                level[v] = level[u] + 1;
+        after.push_back(u);
+        for(auto v: g[u]){
+            if(!vis[v]){
+                vis[v]=true;
                 q.push(v);
             }
         }
     }
-    
-     bool valid = true;
-    for (int i = 1; i < n; i++) {
-        if (level[seq[i]] < level[seq[i-1]]) {
-            valid = false;
-            break;
-        }
+}
+
+signed main(){
+    cin>>n;
+    for(int i =1;i<=n-1;i++){
+        int u,v; cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    for(int i = 1; i <= n; i++){
+        int x;cin>>x;
+        before.push_back(x);
+        beforeIndx[before[i-1]] = i;
+    }
+    for(int i = 1; i <= n; i++){
+        sort(g[i].begin(),g[i].end(),cmp);
+    }
+    bfs();
+    if(before==after){
+        cout<<"YES"<<endl;
+    }else{
+        cout<<"NO"<<endl;
     }
     
-    if (valid) {
-        cout << "Yes" << endl;
-    } else {
-        cout << "No" << endl;
-    }
-    
-    return 0;
 }

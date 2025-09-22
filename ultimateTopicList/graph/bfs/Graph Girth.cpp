@@ -1,47 +1,52 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-const int N = 2501;
-int n, m;
+int n,m;
+const int N = 2e5+1;
 vector<int> g[N];
-vector<int> p(N, -1);
-vector<int> vis(N, false);
-set<pair<int, int>> cycles;
+vector<bool> vis(N,false);
+vector<int> dist(N,-1);
+int ans = INT_MAX;
 
-void findCycle(int u, int parent) {
-    vis[u] = true;
-    p[u] = parent;
-    
-    for (auto v : g[u]) {
-        if (!vis[v]) {
-            findCycle(v, u);
-        } else if (v != parent) {
-            // Cycle detected - store the back edge
-            cycles.insert({min(u, v), max(u, v)});
+void bfs(int s){
+    for(int i=1;i<=n;i++){
+        vis[i]=false;
+        dist[i]=-1;
+    }
+    queue<pair<int,int>> q;
+    q.push({s,-1});
+    vis[s]=true;
+    dist[s]=0;
+    while(!q.empty()){
+        int u = q.front().first;
+        int up = q.front().second;
+        q.pop();
+        for(auto v: g[u]){
+            if(!vis[v]){
+                dist[v] = dist[u]+1;
+                vis[v]=true;
+                q.push({v,u});
+            }else if(up!=v){
+                ans = min(ans, dist[u]+dist[v]+1);
+            }
         }
     }
 }
 
-signed main()
-{
-    cin >> n >> m;
-    for (int i = 1; i <= m; i++)
-    {
-        int x, y;
-        cin >> x >> y;
-        g[x].push_back(y);
-        g[y].push_back(x);
+signed main(){
+    cin>>n>>m;
+    for(int i=0;i<m;i++){
+        int u,v; cin>>u>>v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+        
     }
-    for (int i = 1; i <= n; i++)
-    {
-        if (!vis[i])
-        {
-            findCycle(i,-1);
-        }
+    for(int i=1;i<=n;i++){
+        bfs(i);
     }
-
-    for(auto x: cycles){
-        cout<<x.first<<" "<<x.second<<endl;
+    if(ans==INT_MAX){
+        cout<<-1<<endl;
+    }else{
+        cout<<ans<<endl;
     }
-
     return 0;
 }
