@@ -1,90 +1,93 @@
 #include <bits/stdc++.h>
 using namespace std;
+int n, m;
+const int N = 1e4 + 1;
+vector<bool> a(10, false);
+vector<int> b;
+vector<int> du(N, -1);
+vector<int> p(N, -1);
+vector<bool> vis(N, false);
 
-string findSmallestMultiple(int n, const vector<int>& forbidden_digits) {
-    vector<bool> forbidden(10, false);
-    for (int d : forbidden_digits) {
-        forbidden[d] = true;
+string rec(int u)
+{
+    string s;
+    while (u != -1)
+    {
+        s += ('0' + du[u]);
+        u = p[u];
     }
-    
-    vector<int> allowed_digits;
-    for (int i = 0; i < 10; i++) {
-        if (!forbidden[i]) {
-            allowed_digits.push_back(i);
+    reverse(s.begin(), s.end());
+    return s;
+}
+
+string bfs()
+{
+    for (int i = 0; i <= 9; i++)
+    {
+        if (!a[i])
+        {
+            b.push_back(i);
         }
     }
-    
-    if (allowed_digits.empty()) return "-1";
-    
-    vector<int> parent(n, -1);
-    vector<int> digit_used(n, -1);
-    vector<bool> visited(n, false);
-    
+    sort(b.begin(), b.end());
     queue<int> q;
-    
-    for (int d : allowed_digits) {
-        if (d == 0) continue;
-        
-        int rem = d % n;
-        if (rem == 0) {
-            return to_string(d);
-        }
-        
-        if (!visited[rem]) {
-            visited[rem] = true;
-            parent[rem] = -1;
-            digit_used[rem] = d;
-            q.push(rem);
-        }
+    for (auto x : b)
+    {
+        if (x == 0)
+            continue; 
+        if (x % n == 0)
+            return to_string(x);
+        q.push(x % n);
+        vis[x % n] = true;
+        du[x % n] = x;
+        p[x % n] = -1;
     }
-    
-    while (!q.empty()) {
+    while (!q.empty())
+    {
         int u = q.front();
         q.pop();
-        
-        for (int d : allowed_digits) {
+        if (u % n == 0)
+        {
+            string v = rec(u);
+            return v;
+        }
+
+        for (int d : b)
+        {
             int v = (u * 10 + d) % n;
-            
-            if (!visited[v]) {
-                visited[v] = true;
-                parent[v] = u;
-                digit_used[v] = d;
-                
-                if (v == 0) {
-                    string result;
-                    int current = v;
-                    while (current != -1) {
-                        result += char('0' + digit_used[current]);
-                        current = parent[current];
-                    }
-                    reverse(result.begin(), result.end());
-                    return result;
-                }
-                
+            if (!vis[v])
+            {
                 q.push(v);
+                vis[v] = true;
+                du[v] = d;
+                p[v] = u;
             }
         }
     }
-    
     return "-1";
 }
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    
-    int n, m;
-    int case_num = 1;
-    
-    while (cin >> n >> m) {
-        vector<int> forbidden(m);
-        for (int i = 0; i < m; i++) {
-            cin >> forbidden[i];
+signed main()
+{
+    int c = 1;
+    while (cin >> n && n != 0)
+    {
+        fill(a.begin(), a.end(), false);
+        b.clear();
+        fill(du.begin(), du.end(), -1);
+        fill(p.begin(), p.end(), -1);
+        fill(vis.begin(), vis.end(), false);
+
+        cin >> m;
+
+        for (int i = 0; i < m; i++)
+        {
+            int x;
+            cin >> x;
+            a[x] = true;
         }
-        
-        string result = findSmallestMultiple(n, forbidden);
-        cout << "Case " << case_num++ << ": " << result << '\n';
+        string res = bfs();
+        cout << "Case " << c << ": " << res << '\n';
+        c++;
     }
-    
-    return 0;
 }

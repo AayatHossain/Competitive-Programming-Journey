@@ -1,32 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
+const int N = 2501;
 int n,m;
-const int N = 2e5+1;
 vector<int> g[N];
-vector<bool> vis(N,false);
-vector<int> dist(N,-1);
+vector<int> dis(N,-1);
 int ans = INT_MAX;
 
 void bfs(int s){
     for(int i=1;i<=n;i++){
-        vis[i]=false;
-        dist[i]=-1;
+        dis[i]=-1;
     }
-    queue<pair<int,int>> q;
-    q.push({s,-1});
-    vis[s]=true;
-    dist[s]=0;
+
+    queue<int> q;
+    q.push(s);
+    dis[s]=0;
+    
     while(!q.empty()){
-        int u = q.front().first;
-        int up = q.front().second;
+        int u = q.front();
         q.pop();
-        for(auto v: g[u]){
-            if(!vis[v]){
-                dist[v] = dist[u]+1;
-                vis[v]=true;
-                q.push({v,u});
-            }else if(up!=v){
-                ans = min(ans, dist[u]+dist[v]+1);
+        for(int v: g[u]){
+            if(dis[v]>=dis[u]){
+                ans = min(ans, dis[u]+dis[v]+1);
+                
+            }else if(dis[v]==-1){
+                dis[v]=dis[u]+1;
+                q.push(v);
             }
         }
     }
@@ -35,18 +33,16 @@ void bfs(int s){
 signed main(){
     cin>>n>>m;
     for(int i=0;i<m;i++){
-        int u,v; cin>>u>>v;
-        g[u].push_back(v);
-        g[v].push_back(u);
-        
+        int x,y; cin>>x>>y;
+        g[x].push_back(y);
+        g[y].push_back(x);
     }
     for(int i=1;i<=n;i++){
         bfs(i);
     }
-    if(ans==INT_MAX){
-        cout<<-1<<endl;
-    }else{
-        cout<<ans<<endl;
+    if(ans == INT_MAX){
+        ans = -1;
     }
+    cout<<ans<<endl;
     return 0;
 }
