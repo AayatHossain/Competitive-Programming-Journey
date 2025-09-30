@@ -33,14 +33,14 @@ signed main()
          return x.second < y.second; 
      });
 
-        for(int i = 0; i < n; i++){
-            cout<<a[i].first<<" ";
-            for(int v: a[i].second){
-                cout<<v<<" ";
-            }
-        cout<<endl;
+        // for(int i = 0; i < n; i++){
+        //     cout<<a[i].first<<" ";
+        //     for(int v: a[i].second){
+        //         cout<<v<<" ";
+        //     }
+        // cout<<endl;
             
-        }
+        // }
 
         int p = 0;
         for (int i = 0; i < n; i++)

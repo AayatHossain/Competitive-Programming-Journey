@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+// #define int long long
 const int N = 4001;
 vector<int> g[N];
 vector<bool> vis(N,false);
