@@ -16,7 +16,7 @@ if "A" in m1:
     print(m1["A"])
     
 del m1["A"]
-# print(m1)
+print(m1)
 
 
 m2 = dict(sorted(m1.items()))
