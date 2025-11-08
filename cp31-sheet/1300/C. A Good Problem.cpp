@@ -21,7 +21,7 @@ signed main(){
                 p = i;
             }
         }
-        int nr = (1<<(p+1));
+        int nr = (1LL<<(p+1));
         if(nr>r){
             cout<<-1<<endl;
         }

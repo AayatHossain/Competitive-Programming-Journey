@@ -27,7 +27,7 @@ int f(vector<int> arr, vector<int> selected) {
     return last;
 }
 
-int main() {
+signed main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
     int t;

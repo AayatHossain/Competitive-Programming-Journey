@@ -35,7 +35,6 @@ signed main(){
         //     for(auto x: b){
         //         ans+=x.first;
         //     }
-        //     cout<<ans<<endl;
         //     continue;
         // }
         int s = 0;
