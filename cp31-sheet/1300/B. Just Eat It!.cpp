@@ -6,31 +6,36 @@ signed main(){
     while(t--){
         int n; cin>>n;
         vector<int> a(n);
-        vector<int> p(n);
-        int f = 0;
+        int s = 0;
+        int c = 0;
+        int mx1 = LLONG_MIN;
+      
         for(int i = 0; i < n; i++){
             cin>>a[i];
-            if(i==0)p[0]=a[i];
-            else p[i]=p[i-1]+a[i];
-            if(a[i]<0)f=1;
+            s+=a[i];
         }
-        int mn = 0;
-        int mi = -1;
-        int ans = INT_MIN;
-        for(int i = 0; i < n; i++){
-            ans = max(ans, p[i] - mn);
-            if(p[i]<=mn){
-                mn = p[i];
-                mi = i;
+
+        for(int i = 1; i < n; i++){
+            c+=a[i];
+            if(c < 0){
+                c = 0;
             }
+            mx1 = max(mx1, c);
         }
-        // cout<<ans<<endl;
-        if(ans >= p[n-1] && f==1){
+        c=0;
+        for(int i = 0; i < n-1; i++){
+            c+=a[i];
+            if(c < 0){
+                c = 0;
+            }
+            mx1 = max(mx1, c);
+        }
+        // cout<<mx1<<" "<<mx2<<endl;
+       if(mx1 >= s){
             cout<<"NO"<<endl;
         }else{
             cout<<"YES"<<endl;
         }
-
     }
     return 0;
 }
