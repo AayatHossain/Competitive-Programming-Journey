@@ -1,72 +1,41 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-signed main()
-{
-    int t;
-    cin >> t;
-    while (t--)
-    {
-        int n;
-        cin >> n;
-        vector<pair<int, vector<int>>> a(n);
-        for (int i = 0; i < n; i++)
-        {
-            int x;
-            cin >> x;
-            a[i].first = x;
-            for (int j = 0; j < x; j++)
-            {
-                int y;
-                cin >> y;
-                a[i].second.push_back(y);
+signed main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t; cin>>t;
+    while(t--){
+        int n; cin>>n;
+        vector<int> b(2e5+1,0);
+        vector<vector<int>> a(n);
+        for(int i = 0; i < n; i++){
+            int k; cin>>k;
+            for(int j = 0; j < k; j++){
+                int x; cin>>x;
+                b[x]++;
+                a[i].push_back(x);
             }
-        }
-        int N = 2e5 + 1;
-        vector<int> vis(N, false);
-        sort(a.begin(), a.end(),
-     [](const pair<int, vector<int>> &x, const pair<int, vector<int>> &y) {
-        
-         if (x.first != y.first) 
-             return x.first > y.first;
-
-        
-         return x.second < y.second; 
-     });
-
-        // for(int i = 0; i < n; i++){
-        //     cout<<a[i].first<<" ";
-        //     for(int v: a[i].second){
-        //         cout<<v<<" ";
-        //     }
-        // cout<<endl;
-            
-        // }
-
-        int p = 0;
-        for (int i = 0; i < n; i++)
-        {
-            int f = 1;
-            for (int v : a[i].second)
-            {
-                if (!vis[v])
-                {
-                    f = 0;
-                    break;
+        } 
+        int ans = 0;
+        for(int i = 0 ; i < n; i++){
+            int f= 1;
+            for(auto x: a[i]){
+                b[x]--;
+                if(b[x]==0){
+                    f=0;
+                   
                 }
             }
-            if (!f)
-            {
-                for (int v : a[i].second)
-                {
-                    vis[v]=true;
-                }
-            }else{
-                p=1;
+            if(f){
+                ans=1;
                 break;
+                    
             }
-            
+            for(auto x: a[i]){
+                b[x]++;
+            }
         }
-        if(p){
+        if(ans){
             cout<<"YES"<<endl;
         }else{
             cout<<"NO"<<endl;
