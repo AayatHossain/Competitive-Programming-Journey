@@ -6,12 +6,10 @@ signed main(){
     cin>>t;
     while(t--){
         int a,b,n,m;cin>>a>>b>>n>>m;
-        if(a+b < n+m){
-            cout<<"NO"<<endl;
+        if(a+b >= n+m && m <= min(a,b)){
+            cout<<"Yes"<<endl;
         }
-        else if(a>=m && b>=n){
-            cout<<"YES"<<endl;
-        }
+        
         else{
             cout<<"NO"<<endl;
         }
