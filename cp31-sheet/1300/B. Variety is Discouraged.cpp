@@ -24,6 +24,7 @@ signed main(){
             for(int i = 0; i < n; i++){
                 if(l[i]==mx){
                     cout<<i-mx+2<<" "<<i+1<<endl;
+                    break;
                 }
             }
         }
