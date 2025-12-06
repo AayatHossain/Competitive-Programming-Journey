@@ -13,3 +13,4 @@ for i in range(n):
         mx = a[i]
 print()
 print(mn,mx)
+
