@@ -4,35 +4,42 @@ using namespace std;
 signed main(){
     int t; cin>>t;
     while(t--){
-        int n; cin>>n;
-        vector<int> a(n);
-        vector<int> b(n);
-        for(int i = 0; i < n; i++){
-            cin>>a[i];
+        int n,l,r; cin>>n>>l>>r;
+        vector<int> a(n+1);
+        int f = 1;
+        if((r-l)%2==0){
+            f = 0;
         }
-        for(int i = 0; i < n; i++){
-            cin>>b[i];
+        if(f){
+            for(int i = l; i <= r; i++){
+                a[i] = 1;
+            }
+        }else{
+            if(l==r){
+                a[l]=1;
+            }else{
+                a[l]=1;
+                a[l+1]=3;
+                a[l+2]=2;
+                for(int i = l+3; i <= r; i++){
+                    a[i]=1;
+                }
+            }
         }
-        int dp[n+1][2];
-        
-        dp[0][0]=0;
-        dp[0][1]=0;
+        int v = 4;
+        for(int i = 1; i<=n; i++){
+            if(a[i]==1 || a[i]==3 || a[i]==2){
+                continue;
+            }else{
+                a[i]=v;
+                v++;
+            }
+        }
         for(int i = 1; i <= n; i++){
-            int mx = dp[i-1][0];
-            int mn = dp[i-1][1];
-            // if(k1==LLONG_MIN/2){
-            //     k1 = 0;
-            // }
-            // if(k2==LLONG_MIN/2){
-            //     k2 = 0;
-            // }
-
-            dp[i][0] = max(mx - a[i-1], b[i-1] - mn);
-            dp[i][1] = min(mn - a[i-1], b[i-1] - mx);
-            // cout<<dp[i][0]<<" "<<dp[i][1]<<endl;
+            cout<<a[i]<<" ";
         }
+        cout<<endl;
         
-        cout<<max(dp[n][1],dp[n][0])<<endl;
     }
     return 0;
 }

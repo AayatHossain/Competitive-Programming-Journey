@@ -9,37 +9,25 @@ signed main(){
             cin>>a[i];
         }
         vector<int> ans;
-        int mx = INT_MIN;
+        int cg = 0;
         for(int i = 0; i < n; i++){
-            mx = max(mx,a[i]);
-        }
-        for(int i = 0; i < n; i++){
-            if(a[i]==mx){
-                ans.push_back(mx);
-                a[i]=-1;
-            }
-        }
-        
-        for(int i = 0; i < n; i++){
-            int mx2 = 1;
-            for(int j = 0; j < n; j++){
-                if(a[j]==-1)continue;
-                mx2 = max(mx2,gcd(a[j],mx));
-            }
+            int currentbest = 0;
+            int index = -1;
             for(int j = 0; j < n; j++){
                 if(a[j]==-1)continue;   
-                if(gcd(a[j],mx)==mx2){
-                    ans.push_back(a[j]);
-                    a[j]=-1;
-                    break;
+                if(gcd(cg,a[j]) >= currentbest){
+                    currentbest = gcd(cg,a[j]);
+                    index = j;
                 }
             }
+            ans.push_back(a[index]);
+            a[index] = -1;
+            cg = currentbest;
         }
         for(auto x: ans){
             cout<<x<<" ";
         }
         cout<<endl;
-        cout<<gcd(948,14)<<endl;
     }
     return 0;
 }
