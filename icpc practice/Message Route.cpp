@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
+int n, m;
 const int N = 1e5 + 1;
 vector<int> g[N];
 vector<bool> vis(N, false);
 vector<int> p(N, -1);
 vector<int> ans;
-int n, m;
 
 void bfs()
 {
@@ -18,30 +18,25 @@ void bfs()
         q.pop();
         if (u == n)
             return;
-
         for (auto v : g[u])
         {
             if (!vis[v])
             {
-                p[v] = u;
                 vis[v] = true;
+                p[v] = u;
                 q.push(v);
+                // cout<<v<<endl;
             }
         }
     }
 }
-
-void path()
-{
-    if (p[n] == -1)
-        return;
+void path(){
     int v = n;
-    while (p[v] != -1)
-    {
+    while(p[v] != -1){
         ans.push_back(v);
         v = p[v];
     }
-    ans.push_back(v);
+    ans.push_back(1);
     reverse(ans.begin(),ans.end());
 }
 
@@ -56,16 +51,20 @@ signed main()
         g[v].push_back(u);
     }
     bfs();
-    path();
-    if(ans.size()==0){
-        cout<<"IMPOSSIBLE"<<endl;
-    }else{
-        cout<<ans.size()<<endl;
-        for(auto x: ans){
-            cout<<x<<" ";
-        }
-        cout<<endl;
+    if (p[n] == -1)
+    {
+        cout << "IMPOSSIBLE" << endl;
     }
-    
+    else
+    {
+        path();
+        cout<<ans.size()<<endl;
+        for (auto x : ans)
+        {
+            cout << x << " ";
+        }
+        cout << '\n';
+    }
+
     return 0;
 }

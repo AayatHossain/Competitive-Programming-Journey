@@ -23,7 +23,7 @@ signed main(){
         // cout<<endl;
 
         int l = -1;
-        int mx = LLONG_MIN;
+        int mx = -1;
         for(int i = 1; i+k-2 < n; i++){
             int d = p[i+k-2] - p[i];
             if(d > mx){
