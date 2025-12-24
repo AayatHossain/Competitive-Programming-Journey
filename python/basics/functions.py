@@ -78,14 +78,47 @@
 
 
 
-square = lambda x: x*x
-add = lambda x: x+x
-nothing = lambda x: ""
-addtwo = lambda a,b: a+b
-multwo = lambda a,b: a*b
+# square = lambda x: x*x
+# add = lambda x: x+x
+# nothing = lambda x: ""
+# addtwo = lambda a,b: a+b
+# multwo = lambda a,b: a*b
 
-print(square(3))
-print(add(3))
-print(nothing(3))
-print(addtwo(2,5))
-print(multwo(2,3))
+# print(square(3))
+# print(add(3))
+# print(nothing(3))
+# print(addtwo(2,5))
+# print(multwo(2,3))
+
+
+
+
+
+#this is just a hint, it doesnt force types
+# def add(x:int, y:int)->int:
+#     return x+y
+# print(add(1,2))
+# print("st",2)
+
+
+
+#typing optional
+# from typing import Optional
+# def greet(name: Optional[str]=None):
+#     if name == None:
+#         return "Hello ass"
+#     else:
+#         return f"Hello {name}"
+# print(greet())
+# print(greet("aayat"))
+
+
+
+
+
+#typing union
+from typing import Union
+def con(name: Union[str, int]):
+    return name
+print(con("aa"))
+print(con(20))
