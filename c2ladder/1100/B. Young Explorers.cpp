@@ -14,7 +14,8 @@ signed main(){
         for(int i = 0; i < n; i++){
            
             if(c==a[i]){
-                ans++;
+                ans++;B. Ashmal
+
                 c = 1;
                 continue;
             }
