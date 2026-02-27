@@ -4,7 +4,7 @@ const int ms = 1e5+1;
 bitset<ms> bit;
 vector<int> p(1e5+1);
 signed main(){
-    ios::sync_with_stdio(false);
+    
     cin.tie(NULL);
     int n,q; cin>>n>>q;
     vector<int> a(n);
