@@ -1,57 +1,77 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
- * };
- */
-class Solution {
-public:
-    bool f1(TreeNode* r1, TreeNode* r2) {
-        queue<pair<TreeNode*, TreeNode*>> q;
-        q.push({r2, r1});
-        while (!q.empty()) {
-            pair<TreeNode*, TreeNode*> t = q.front();
-            TreeNode* n = t.first;
-            TreeNode* n2 = t.second;
-            q.pop();
-            if (!n && !n2)
-                continue;
-            if (!n || !n2)
-                return false;
-            if (n->val != n2->val)
-                return false;
+//string serialization plus kmp. O(n+m) time and space approach
 
-            q.push({n->left, n2->left});
-            q.push({n->right, n2->right});
+
+class Solution {
+private:
+    using node = TreeNode*;
+    void pre(node r, string &s){
+        if(!r){
+            s+=" N";
+            return;
         }
-        return true;
+
+        s+= " " + to_string(r->val);
+        pre(r->left,s);
+        pre(r->right,s);
+
+        return;
     }
-    bool f(TreeNode* r1, TreeNode* r2) {
-        queue<TreeNode*> q;
-        q.push(r1);
-        while (!q.empty()) {
-            TreeNode* n = q.front();
-            q.pop();
-            if (n->val == r2->val) {
-                bool ok = f1(n, r2);
-                if (ok)
+
+    bool kmp(string &s, string &t){
+        
+        vector<int> lps(t.size(),0);
+        makelps(t,lps);
+        int n = s.size();
+        int m = t.size();
+
+        int i = 0,j = 0;
+        while(i < n){
+            
+            if(s[i]==t[j]){
+                i++; j++;
+                if(j==m){
                     return true;
+                }
+            }else{
+                if(j!=0){
+                    j = lps[j-1];
+                }else{
+                    i++;
+                }
             }
-            if (n->left != nullptr)
-                q.push(n->left);
-            if (n->right != nullptr)
-                q.push(n->right);
         }
         return false;
     }
-    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
-        bool ok = f(root, subRoot);
-        return ok;
+
+    void makelps(string t, vector<int> &lps){
+        int length = 0, i= 1;
+        int m = lps.size();
+        while(i < m){
+            if(t[i]==t[length]){
+                length++;
+                lps[i] = length;
+                i++;
+            }else{
+                if(length != 0){
+                    length = lps[length - 1];
+                }else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+    }
+
+
+public:
+    bool isSubtree(TreeNode* r, TreeNode* sr) {
+        string pr;
+        pre(r,pr);
+
+        string psr;
+        pre(sr,psr);
+        
+        bool f = kmp(pr,psr);
+        return f;
     }
 };
