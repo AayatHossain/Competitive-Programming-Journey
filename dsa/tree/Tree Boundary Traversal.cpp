@@ -1,3 +1,6 @@
+//morris traversal used for leaf finding, dfs can also be used. morris is better
+
+
 /*
 class Node {
   public:
@@ -14,73 +17,116 @@ class Node {
 };
 */
 
-class Solution {
-  public:
-    Node* init;
-    void f(Node* root, vector<int> &c){
-        if(!root)return;
-        if(!(root->left) && !(root->right) && root!=init){
-            c.push_back(root->data);
-            return;
+class Solution
+{
+public:
+    Node *init;
+    void f(Node *root, vector<int> &a)
+    {
+        if (!root || (!root->left && !root->right)) return;
+        
+        Node *curr = root;
+        while (curr)
+        {
+            if (!curr->left)
+            {
+            
+                if (!curr->right) 
+                {
+                    a.push_back(curr->data);
+                 }
+                curr = curr->right;
+            }
+            else
+            {
+                Node *prev = curr->left;
+                while (prev->right && prev->right != curr)
+                {
+                    prev = prev->right;
+                }
+                if (prev->right == curr)
+                {
+                   
+                         if(!prev->left){
+                             a.push_back(prev->data);
+                         }
+                    
+                    prev->right = nullptr;
+                    curr = curr->right;
+                }
+                else
+                {
+                    prev->right = curr;
+                    curr = curr->left;
+                }
+            }
         }
-        f(root->left,c);
-        f(root->right,c);
+        
     }
-    vector<int> boundaryTraversal(Node *root) {
+
+    vector<int> boundaryTraversal(Node *root)
+    {
         // code here
         vector<int> a;
         vector<int> b;
         vector<int> c;
         init = root;
         a.push_back(root->data);
-        
-        
-        
-        Node* curr = root->left;
-        while(curr){
-            if(!(curr->left) && !(curr->right)){
+
+        Node *curr = root->left;
+        while (curr)
+        {
+            if (!(curr->left) && !(curr->right))
+            {
                 break;
             }
-            
+
             a.push_back(curr->data);
-            if(curr->left){
+            if (curr->left)
+            {
                 curr = curr->left;
-            }else{
+            }
+            else
+            {
                 curr = curr->right;
             }
         }
-        
 
         curr = root->right;
-        while(curr){
-            if(!(curr->left) && !(curr->right)){
+        while (curr)
+        {
+            if (!(curr->left) && !(curr->right))
+            {
                 break;
             }
-        
-        
+
             b.push_back(curr->data);
-            if(curr->right){
+            if (curr->right)
+            {
                 curr = curr->right;
-            }else{
+            }
+            else
+            {
                 curr = curr->left;
             }
-            
         }
-        reverse(b.begin(),b.end());
-        
-        f(root,c);
-       
+        reverse(b.begin(), b.end());
+
+        f(root, c);
+
         vector<int> res;
-        for(int i = 0; i < a.size(); i++){
+        for (int i = 0; i < a.size(); i++)
+        {
             res.push_back(a[i]);
         }
-        for(int i = 0; i < c.size(); i++){
+        for (int i = 0; i < c.size(); i++)
+        {
             res.push_back(c[i]);
         }
-         for(int i = 0; i < b.size(); i++){
+        for (int i = 0; i < b.size(); i++)
+        {
             res.push_back(b[i]);
         }
         return res;
-        
     }
 };
