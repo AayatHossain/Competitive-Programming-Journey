@@ -1,4 +1,4 @@
-//on time and o1 space
+//ON time and O1 space. MY SOLUTION
 
 class Solution {
 public:
@@ -37,5 +37,34 @@ public:
             i++;
             j--;
         }
+    }
+};
+
+
+
+//CLEANER IMPLEMENTATION BY GPT
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& a) {
+        int n = a.size();
+        int i = n - 2;
+
+        // 1. Find pivot
+        while (i >= 0 && a[i] >= a[i + 1]) {
+            i--;
+        }
+
+        // 2. Find element just larger than pivot
+        if (i >= 0) {
+            int j = n - 1;
+            while (a[j] <= a[i]) {
+                j--;
+            }
+            swap(a[i], a[j]);
+        }
+
+        // 3. Reverse suffix
+        reverse(a.begin() + i + 1, a.end());
     }
 };
