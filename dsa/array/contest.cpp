@@ -20,12 +20,13 @@ signed main()
         int cacnt = m/cal;
 
         int alice = 0, bob = 0, carol = 0;
+        // cout<<l<<endl;
+        // cout<<lcnt<<endl;
+        // cout<<abl<<endl;
+        // cout<<abcnt<<endl;
 
-        
-        cout<<l<<endl;
-        cout<<lcnt<<endl;
-        cout<<abl<<endl;
-        cout<<abcnt<<endl;
+        alice = (m/a)*6;
+        if()
 
 
     }
