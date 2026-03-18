@@ -11,7 +11,6 @@ void bfs(){
     for(int i = 1; i <= n; i++){
         if(ind[i]==0){
             q.push(i);
-           
         }
     }
     while(!q.empty()){
@@ -20,12 +19,10 @@ void bfs(){
          ans.push_back(u);
         for(int v: g[u]){
             ind[v]--;
-            if(ind[v]==0){
-                
+            if(ind[v]==0){    
                 q.push(v);
             }
-            
-
+           
         }
     }
 }
