@@ -10,59 +10,39 @@ signed main()
         cin >> n;
         string s;
         cin >> s;
-        int ca = 0, cb = 0;
-        for (int i = 0; i < n; i++)
-        {
-            if (s[i] == 'a')
-                ca++;
-            else
-                cb++;
-        }
-        char c;
-        int extra;
-        if (ca > cb)
-        {
-            c = 'a';
-            extra = ca - cb;
-        }
-        else
-        {
-            c = 'b';
-            extra = cb - ca;
-        }
-
-        int ans = INT_MAX;
-        for (int i = 0; i < n && extra > 0; i++)
-        {
-            int j = i + 1;
-            char ch = s[i];
-            int cnt = j - i + 1;
-
-            while (j < n && s[i] == s[j])
-            {
-                cnt = j - i + 1;
-                if (ch == c && cnt >= extra)
-                {
-                    ans = min(ans, cnt);
-                }
-                j++;
-            }
-            j--;
-            cnt = j - i + 1;
-            i = j;
-
-            if (ch == c && cnt >= extra)
-            {
-                ans = min(ans, cnt);
+        
+        vector<int> p(n+1,0);
+        for(int i = 1; i <= n; i++){
+            if(s[i-1]=='a'){
+                p[i] = p[i-1] + 1;
+            }else{
+                p[i] = p[i-1] - 1;
             }
         }
-        if (extra == 0)
-            ans = 0;
-        else if (ans == INT_MAX)
-            ans = -1;
-        else if (ans == n)
-            ans = -1;
-        cout << ans << endl;
+
+        // for(auto x: p){
+        //     cout<<x<<" ";
+        // }
+        // cout<<endl;
+
+        int sum = p[n];
+
+        map<int,int> m;
+        m[0] = 0;
+        int mn = INT_MAX;
+        for(int i = 1; i <= n; i++){
+            int left = p[i] - sum;
+            if(m.find(left) != m.end()){
+                mn = min(mn, i - m[left]);
+                // cout<<i<<endl;
+            }
+            m[p[i]] = i;
+        }
+        if(mn==INT_MAX || mn==s.size())mn = -1; 
+        if(sum==0)mn=0;
+        
+        cout<<mn<<endl;
+
     }
     return 0;
 }
