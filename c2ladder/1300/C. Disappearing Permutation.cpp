@@ -38,7 +38,7 @@ signed main(){
             }
 
             // a[curr] = curr;
-            c++;
+            // c++;
 
             ans += c;
             cout<<ans<<" ";
