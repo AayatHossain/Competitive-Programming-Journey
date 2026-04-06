@@ -1,23 +1,24 @@
-class Solution {
-  public:
-    static bool cmp(string s, string t){
-        string v1 = s+t;
-        string v2 = t+s;
-        return v1 > v2;
-    }
-  
-    string findLargest(vector<int> &arr) {
-        // code here
-        vector<string> a(arr.size());
-        for(int i = 0; i < arr.size(); i++){
-            a[i] = to_string(arr[i]);
+#include<bits/stdc++.h>
+using namespace std;
+signed main(){
+    int n; cin>>n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i++)cin>>a[i];
+    int i = 0, j = n-1;
+    int c = 0;
+    while(i < j){
+        if(a[i] < a[j]){
+            i++;
+            c++;
+            a[i] += a[i-1];
+        }else if(a[j] < a[i] ){
+            j--;
+            c++;
+            a[j] += a[j+1];
+        }else{
+            i++;j--;
         }
-        sort(a.begin(),a.end(),cmp);
-        if(a[0]=="0")return "0";
-        string s = "";
-        for(int i= 0;i < arr.size(); i++){
-            s+=a[i];
-        }
-        return s;
     }
-};
+    cout<<c<<endl;
+    return 0;
+}
