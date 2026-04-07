@@ -7,43 +7,28 @@ signed main(){
     while(t--){
         int n,k; cin>>n>>k;
         vector<int> a(n);
-        multiset<int> ms;
+        int f0 = 1, f1 = 1;
+        int c1 = 0, c2 = 0;
         for(int i = 0; i < n; i++){
             cin>>a[i];
-            ms.insert(a[i]);
         }
-        int mn1 = LLONG_MAX;
-        int mn2 = LLONG_MAX;
-
-        mn1 = min(mn1, a[n-1]);
-        for(int i = 0; i < n-1; i++){
-            mn1 = min(mn1, a[i]);
-            for(int j = i+1; j < n; j++){
-                int diff = abs(a[i]-a[j]);
-                mn1 = min(mn1, diff);
-
-
-                auto it = ms.lower_bound(diff);
-                if(it != ms.end()){
-                    int val = *it;
-                    mn2 = min(mn2, abs(diff - val));
-                }
-                if(it != ms.begin()){
-                    it--;
-                    int val = *it;
-                    mn2 = min(mn2, abs(diff - val));
-                }
-                
-
+        int ind; cin>>ind;
+        ind--;
+        for(int i = 0; i < ind; i++){
+            if(a[i] != a[i+1]){
+                c1++;
             }
         }
-        if(k >= 3){
-            cout<<0<<endl;
-        }else if(k == 2){
-            cout<<min(mn1,mn2)<<endl;
-        }else{
-            cout<<mn1<<endl;
+        for(int i = ind; i < n-1; i++){
+            if(a[i] != a[i+1]){
+                c2++;
+            }
         }
+        int ans = max(c1,c2);
+        if(ans&1)ans++;
+        cout<<ans<<endl;
+        
+
     }
     return 0;
 }
