@@ -1,54 +1,75 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 #define int long long
 
-signed main()
-{
+int32_t main() {
     ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+    cin.tie(NULL);
 
-    int n,m; cin>>n>>m;
-    char a[n][n];
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            cin>>a[i][j];
-        }
-    }
+    int t;
+    cin >> t;
 
+    while (t--) {
+        int n;
+        cin >> n;
 
-    // for(int i = 0; i < n; i++){
-    //     for(int j = 0; j < n; j++){
-    //         cout<<a[i][j]<<" ";
-    //     }
-    //     cout<<endl;
-    // }
+        vector<int> a(n + 1);
+        for (int i = 1; i <= n; i++) cin >> a[i];
 
-    set<string> s;
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
-            if(i+(m-1)< n && j+m-1 < n){
-                string str;
-                for(int k = i; k <= i+m-1; k++){
-                    for(int l = j; l <= j+m-1; l++){
-                        if(a[k][l]=='#'){
-                            str+='B';
-                        }else{
-                            str+='W';
-                        }
-                    }
+        // prefix bit count
+        vector<vector<int>> b(n + 1, vector<int>(32, 0));
+
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < 32; j++) {
+                b[i][j] = b[i - 1][j];
+                if (a[i] & (1LL << j)) {
+                    b[i][j]++;
                 }
-                // if(str =="WBBB"){
-                //     cout<<i<<" "<<j<<endl;
-                // }
-                s.insert(str);
             }
         }
+
+        int q;
+        cin >> q;
+
+        while (q--) {
+            int l, k;
+            cin >> l >> k;
+
+            int low = l, high = n;
+            int ans = -1;
+
+            auto ok = [&](int l, int r) {
+                int val = 0;
+                int len = r - l + 1;
+
+                for (int j = 0; j < 32; j++) {
+                    int cnt = b[r][j] - b[l - 1][j];
+
+                    
+                    if (cnt == len) {
+                        val |= (1LL << j);
+                    }
+                }
+
+                return val >= k;
+            };
+
+            while (low <= high) {
+                int mid = (low + high) / 2;
+
+                if (ok(l, mid)) {
+                    ans = mid;
+                    low = mid + 1;
+                } else {
+                    high = mid - 1;
+                }
+            }
+
+            cout << ans << " ";
+        }
+        cout << "\n";
     }
-    cout<<s.size()<<endl;
-    // for(auto x: s){
-    //     cout<<x<<endl;
-    // }
-    
+
     return 0;
 }
