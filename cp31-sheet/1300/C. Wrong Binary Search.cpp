@@ -1,44 +1,62 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-signed main(){
-    int t; cin>>t;
-    while(t--){
-        int n; cin>>n;
-        string s; cin>>s;
-        vector<int> a(n);
-        int c1 = 0;
-        for(int i = 0; i < n; i++){
-            if(s[i]=='1'){
-                c1++;
-            }
-            a[i]=i+1;
+signed main()
+{
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+        vector<int> a(n + 1);
+        for (int i = 1; i <= n; i++)
+        {
+            a[i] = i;
         }
-        int c2 = 0;
-        for(int i = 1; i < n; i++){
-            if(s[i]=='0' && s[i-1] == '0'){
-                int tmp = a[i];
-                a[i] = a[i-1];
-                a[i-1] = tmp;
-                i++;
-                c2 += 2;
+        int l = 1;
+        int r;
+        int ok = 1;
+        while (l <= n)
+        {
+            if (s[l - 1] == '1')
+            {
+                l++;
+                continue;
+            }
+            else
+            {
+                r = l;
+                while (r + 1 <= n && s[r] == '0')
+                {
+                    r++;
+                }
+                if (r - l + 1 == 1)
+                {
+                    l = r + 1;
+                    ok = 0;
+                    break;
+                }
+                for (int i = l; i < r; i++)
+                {
+                    a[i] = i + 1;
+                }
+                a[r] = l;
+                l = r + 1;
             }
         }
-        if(c1==0){
-            cout<<"YES"<<endl;
-            for(int i = n; i >= 1; i--){
-                cout<<i<<" ";
-            }
-            cout<<endl;
+        if (!ok)
+        {
+            cout << "No" << endl;
+            continue;
         }
-        else if(c1+c2==n){
-            cout<<"YES"<<endl;
-            for(auto x: a){
-                cout<<x<<" ";
-            }
-            cout<<endl;
-        }else{
-            cout<<"NO"<<endl;
+        cout << "Yes" << endl;
+        for (int i = 1; i <= n; i++)
+        {
+            cout << a[i] << " ";
         }
+        cout << endl;
     }
     return 0;
 }
