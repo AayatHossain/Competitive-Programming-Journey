@@ -60,7 +60,8 @@ int32_t main() {
 
                 if (ok(l, mid)) {
                     ans = mid;
-                    low = mid + 1;
+                    low = mid + 1;C. Wrong Binary Search
+
                 } else {
                     high = mid - 1;
                 }
