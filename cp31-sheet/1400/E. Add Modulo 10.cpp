@@ -48,18 +48,6 @@ signed main() {
                   continue;
             }
 
-
-            // if (x % 2 == 1) {
-
-            //     if (mp.count(x)) {
-            //         mp[x]++;
-            //         continue;
-            //     }else{
-            //         x += (x%10);
-            //     }
-                
-            // }
-
             for (auto &it : mp) {
                 int y = it.first;
                 if (y >= x) {

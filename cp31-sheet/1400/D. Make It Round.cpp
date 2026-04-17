@@ -41,10 +41,7 @@ signed main()
         c5 -= mn;
         int curr = 1;
 
-        // for (int i = 0; i < mn; i++)
-        // {
-        //     curr *= 10;
-        // }
+       
 
         // cout<<c2<<" "<<c5<<endl;
         // cout<<curr<<endl;
