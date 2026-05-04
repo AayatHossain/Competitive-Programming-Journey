@@ -1,3 +1,5 @@
+https://www.naukri.com/code360/problems/duplicate-parenthesis_2663296?leftPanelTabValue=PROBLEM
+
 //n and n complexity
 //using stack and pair of previous pop, where the distance of previous pop and current pop of both first second brackets should be 1
 #include <bits/stdc++.h> 
@@ -23,3 +25,6 @@ bool duplicateParanthesis(string &s)
     }
     return false;
 }
+
+
+
