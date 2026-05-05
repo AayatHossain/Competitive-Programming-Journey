@@ -1,0 +1,1 @@
+{"name":"Local: contest","url":"d:\\porashuna\\Competitive-Programming-Journey\\c2ladder\\1200\\contest.cpp","tests":[{"id":1753627549342,"input":"4\n4\n5 6 1 1\n3\n3 1 2\n3\n40 60 90\n2\n1 1\n","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\porashuna\\Competitive-Programming-Journey\\c2ladder\\1200\\contest.cpp","group":"local","local":true}
